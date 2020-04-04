@@ -1,0 +1,4 @@
+2019-10-03 11:20:30.926 [http-nio-8080-exec-5] ERROR  - java.io.IOException: Broken pipe
+2019-10-03 11:20:30.927 [http-nio-8080-exec-6] ERROR  - java.io.IOException: Broken pipe
+2019-10-03 11:20:30.939 [http-nio-8080-exec-1] ERROR  - java.io.IOException: Broken pipe
+2019-10-03 11:20:44.596 [http-nio-8080-exec-2] ERROR  - java.net.SocketTimeoutException

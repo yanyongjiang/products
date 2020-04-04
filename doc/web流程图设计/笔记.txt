@@ -1,0 +1,125 @@
+         var connectorPaintStyle = {
+		 lineWidth: 4,
+         strokeStyle: "#61B7CF",
+               joinstyle: "round",
+                  outlineColor: "white",
+                 outlineWidth: 2
+              };
+            // 鼠标悬浮在连接线上的样式
+            var connectorHoverStyle = {
+                 lineWidth: 4,
+                 strokeStyle: "#216477",
+                 outlineWidth: 2,
+                 outlineColor: "white"
+            };
+          var hollowCircle = {
+                endpoint: ["Dot", { radius: 8 }],  //端点的形状
+                connectorStyle: connectorPaintStyle,//连接线的颜色，大小样式
+                connectorHoverStyle: connectorHoverStyle,
+                paintStyle: {
+                   strokeStyle: "#1e8151",
+                    fillStyle: "transparent",
+                    radius: 2,
+                    lineWidth: 2
+                },        //端点的颜色样式
+                //anchor: "AutoDefault",
+               isSource: true,    //是否可以拖动（作为连线起点）
+                 connector: ["Flowchart", { stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true }],  //连接线的样式种类有[Bezier],[Flowchart],[StateMachine ],[Straight ]
+               isTarget: true,    //是否可以放置（连线终点）
+                maxConnections: -1,    // 设置连接点最多可以连接几条线
+                connectorOverlays: [["Arrow", { width: 10, length: 10, location: 1 }]]
+            };
+			
+			//基本连接线样式
+var connectorPaintStyle = {
+    strokeStyle: "#1e8151",
+    fillStyle: "transparent",
+    radius: 5,
+    lineWidth: 2
+};
+
+.flow_endpoint{
+    border: #B7C8D7 1px solid;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.flow_endpoint_hover{
+    border: #B7C8D7 1px solid;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    color:red;
+}
+
+ fill1: '#1e8151',
+// 鼠标悬浮在连接线上的样式
+var connectorHoverStyle = {
+    lineWidth: 3,
+    strokeStyle: "#216477",
+    outlineWidth: 2,
+    outlineColor: "white"
+};
+var endpointHoverStyle = {
+    fillStyle: "#216477",
+    strokeStyle: "#216477"
+};
+//空心圆端点样式设置
+var hollowCircle = {
+    DragOptions: { cursor: 'pointer', zIndex: 2000 },
+    endpoint: ["Dot", { radius: 7 }],  //端点的形状
+    connectorStyle: connectorPaintStyle,//连接线的颜色，大小样式
+    connectorHoverStyle: connectorHoverStyle,
+    paintStyle: {
+        strokeStyle: "#1e8151",
+        fillStyle: "transparent",
+        radius: 5,
+        lineWidth: 2
+    },        //端点的颜色样式
+    //anchor: "AutoDefault",
+    isSource: true,    //是否可以拖动（作为连线起点）
+    connector: ["Straight", { stub: [0, 0], gap: 10, cornerRadius: 5, alwaysRespectStubs: true }],  //连接线的样式种类有[Bezier],[Flowchart],[StateMachine ],[Straight ]
+    isTarget: true,    //是否可以放置（连线终点）
+    maxConnections: -1,    // 设置连接点最多可以连接几条线
+    connectorOverlays: [["Arrow", { width: 10, length: 10, location: 1 }]]
+};
+
+
+var connectorPaintStyle = {
+            lineWidth: 1,
+            strokeStyle: "#096EBB",
+            joinstyle:"round",
+            outlineColor: "#096EBB",
+            outlineWidth: 1
+        };
+        var connectorPaintStyle = {
+            lineWidth: 8,
+            strokeStyle: "#61B7CF",
+            joinstyle: "round",
+            outlineColor: "red",
+            outlineWidth: 8
+        };
+        // 鼠标悬浮在连接线上的样式
+        var connectorHoverStyle = {
+            lineWidth: 8,
+            strokeStyle: "#216477",
+            outlineWidth: 8,
+            outlineColor: "red"
+        };
+        var hollowCircle = {
+            endpoint: ["Dot", {radius: 8,cssClass:"flow_endpoint",hoverClass:"yyy"}],  //端点的形状
+            connectorStyle: connectorPaintStyle,//连接线的颜色，大小样式
+            connectorHoverStyle: connectorHoverStyle,
+            paintStyle: {
+                strokeStyle: "#1e8151",
+                fillStyle: "transparent",
+                radius: 8,
+                lineWidth: 8
+            },        //端点的颜色样式
+            //anchor: "AutoDefault",
+            isSource: true,    //是否可以拖动（作为连线起点）
+            connector: ["Bezier", {stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true}],  //连接线的样式种类有[Bezier],[Flowchart],[StateMachine ],[Straight ]
+            isTarget: true,    //是否可以放置（连线终点）
+            maxConnections: -1,    // 设置连接点最多可以连接几条线
+            connectorOverlays: [["Arrow", {width: 10, length: 10, location: 1}]]
+        };

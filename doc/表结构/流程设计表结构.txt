@@ -1,0 +1,47 @@
+流程分类表
+
+CREATE TABLE `flowcatalog` (
+  `id` varchar(64) NOT NULL,
+  `fldname` varchar(500) DEFAULT NULL,
+  `fldsn` int(11) DEFAULT NULL,
+  `fldparentid` varchar(64) DEFAULT NULL,
+  `fldparentname` varchar(500) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `state` varchar(2) DEFAULT '1',
+  `inituserid` varchar(64) DEFAULT NULL,
+  `initusername` varchar(64) DEFAULT NULL,
+  `initbmid` varchar(64) DEFAULT NULL,
+  `initbm` varchar(64) DEFAULT NULL,
+  `initdeptid` varchar(64) DEFAULT NULL,
+  `initdeptname` varchar(64) DEFAULT NULL,
+  `initunitid` varchar(64) DEFAULT NULL,
+  `initunitname` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+流程定义表
+
+CREATE TABLE `flowdef` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500) DEFAULT NULL,
+  `fldcontent` text,
+  `fldngdate` datetime DEFAULT NULL,
+  `state` varchar(2) DEFAULT '1',
+  `fldsn` int(11) DEFAULT NULL,
+  `fldver` int(11) DEFAULT NULL,
+  `fldcatid` varchar(64) DEFAULT NULL,
+  `inituserid` varchar(64) DEFAULT NULL,
+  `initusername` varchar(64) DEFAULT NULL,
+  `initbmid` varchar(64) DEFAULT NULL,
+  `initbm` varchar(64) DEFAULT NULL,
+  `initdeptid` varchar(64) DEFAULT NULL,
+  `initdeptname` varchar(64) DEFAULT NULL,
+  `initunitid` varchar(64) DEFAULT NULL,
+  `initunitname` varchar(64) DEFAULT NULL,
+  `fldtype` varchar(64) DEFAULT NULL,
+  `fldmduserid` varchar(64) DEFAULT NULL,
+  `fldmdusername` varchar(64) DEFAULT NULL,
+  `fldmddate` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+

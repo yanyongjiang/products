@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>全文检索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ztree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/jqgrid/css/ui.jqgrid-bootstrap4.css">
+    <link rel="stylesheet" href="/jedate/css/jedate.css">
+    <script src="/jquery/js/jquery-3.3.1.min.js"></script>
+    <script src="/jquery/js/jquery.form.js"></script>
+    <script src="/es/js/es.all.js"></script>
+    <script src="/platform/js/platform.js"></script>
+    <script src="/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="/dialog/js/dialog.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootbox/js/bootbox.min.js"></script>
+    <script src="/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <script src="/jqgrid/js/jquery.jqGrid.min.js"></script>
+    <script src="/jedate/js/jedate.min.js"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+        $(document).ready(function () {
+            Es.listToImportWork();
+        });
+    </SCRIPT>
+</head>
+<body onload="" style="">
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 column" id="orgtitldiv">
+            <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+                <p class="navbar-text" id="es_sy" style="cursor: pointer;">全文检索</p>
+            </nav>
+        </div>
+        <div class="col-md-1 column">
+            <nav>
+                <ul class="nav nav-pills nav-stacked" id="menu">
+                    <li role="presentation"><a href="/essearchindex.html" target="_blank">开始搜索</a></li>
+                    <li role="presentation" id="ToImportWork" class="active" onclick="Es.listToImportWork(this);"><a href="#">待导入数据</a></li>
+                    <li role="presentation" id="ImportedWork" onclick="Es.listImportedWork(this);"><a href="#">已导入数据</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div name="content">
+        </div>
+    </div>
+</div>
+</body>

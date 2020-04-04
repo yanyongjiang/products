@@ -1,0 +1,98 @@
+贴子内容表 
+
+bbspost
+
+id 主键
+fldtm 题名
+fldcontent 内容
+fldngdate 创建时间
+
+bbsreplay
+id 主键
+fldfromid 贴子id
+fldcontent 回复内容
+fldngdate 创建时间
+fldsn 回复序号
+
+
+CREATE TABLE `bbspost` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500) DEFAULT NULL,
+  `fldcontent` text,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldstatus` varchar(2) DEFAULT NULL,
+  `fldtext` text,
+`flduserid` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `bbsreplay` (
+  `id` varchar(64) NOT NULL,
+  `fldfromid` varchar(64) NOT NULL,
+  `fldcontent` text NOT NULL,
+  `fldngdate` datetime NOT NULL,
+  `fldsn` int(11) NOT NULL,
+  `fldstatus` varchar(2) DEFAULT NULL,
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldreplayid` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `bbsattach` (
+  `id` varchar(64) NOT NULL,
+  `pkid` varchar(64) DEFAULT NULL,
+  `fldpath` varchar(64) DEFAULT NULL,
+  `fldfilename` varchar(600) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldsize` varchar(100) DEFAULT NULL,
+  `fldext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+封装一个数据库工具类。供service使用。使用是初始化spring bean。
+提供一个servlet 控制类代码跳转，调用service的excute 方法。参数统一使用map 传参。
+数据如何返回给浏览器。
+考虑上传图片如何实现。
+
+
+CREATE TABLE `bbsuser` (
+  `id` varchar(64) NOT NULL,
+  `fldloginid` varchar(500),
+  `fldname` varchar(500),
+  `fldpassword` varchar(500),
+  PRIMARY KEY (`id`)
+);
+
+
+CREATE TABLE `bbsreplaytips` (
+  `id` varchar(64) NOT NULL,
+  `flduserid` varchar(64),
+  `fldreplayid` varchar(64),
+  `fldpostid` varchar(64),
+  `fldreplayrid` varchar(64),
+  `fldreaddate` datetime DEFAULT NULL,
+  `fldtipuserids` varchar(64) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+CREATE TABLE `bbschartuser` (
+  `id` varchar(64) NOT NULL,
+  `flduserid` varchar(64),
+  `fldfriendid` varchar(64),
+  `fldngdate` datetime,
+  `fldlastcdate` datetime,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `bbschartcont` (
+  `id` varchar(64) NOT NULL,
+  `fldfrom` varchar(64),
+  `fldto` varchar(64),
+  `fldngdate` datetime,
+  `fldtext` text,
+ `fldrdate` datetime,
+  PRIMARY KEY (`id`)
+);

@@ -1,0 +1,2572 @@
+
+<!doctype html>
+<html>
+<!--页面标题-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=IE8" />
+<title>华能呼伦贝尔能源开发有限公司</title>
+<link rel="stylesheet" type="text/css" href="/sys/res/cms/ml/css/main.css" />
+<script type="text/javascript" src="/sys/res/DatePicker/WdatePicker.js?ver=1"></script> 
+</head>
+<!-- 首页正式内容 -->
+<body>
+<link href="/sys/res/cms/ml/js/libs/prettify/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/extjs/resources/css/extjs.css"/>
+<style>
+.selectComplent{
+    background-color:#000;
+    filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+}
+</style>
+
+<script type="text/javascript" src="/sys/comp/402880ea32b902070132b909982a0006"></script>
+
+<script>
+    //数据加载完成后调用此方法
+    //各种js插件需要数据渲染完成后才加载的均在此方法中进行
+    function initAllPlugs(){
+        
+        //图片轮播控件
+        /// initImageAround();
+    }
+
+</script>
+
+<script>
+//右键菜单
+(function($) {
+    var menu, shadow, trigger, content, hash, currentTarget;
+    var defaults = {
+        menuStyle: {
+            listStyle: 'none',
+            padding: '1px',
+            margin: '0px',
+            backgroundColor: '#fff',
+            border: '1px solid #999',
+            width: '100px'
+        },
+        itemStyle: {
+            margin: '0px',
+            color: '#000',
+            display: 'block',
+            cursor: 'default',
+            padding: '3px',
+            border: '1px solid #fff',
+            backgroundColor: 'transparent'
+        },
+        itemHoverStyle: {
+            border: '1px solid #0a246a',
+            backgroundColor: '#b6bdd2'
+        },
+        eventPosX: 'pageX',
+        eventPosY: 'pageY',
+        shadow : true,
+        onContextMenu: null,
+        onShowMenu: null
+ 	};
+
+    $.fn.contextMenu = function(id, options) {
+        if (!menu) {                                      // Create singleton menu
+            menu = $('<div id="jqContextMenu"></div>')
+                .hide()
+                .css({position:'absolute', zIndex:'500'})
+                .appendTo('body')
+                .bind('click', function(e) {
+                    e.stopPropagation();
+                });
+        }
+        if (!shadow) {
+            shadow = $('<div></div>')
+                .css({backgroundColor:'#000',position:'absolute',opacity:0.2,zIndex:499})
+                .appendTo('body')
+                .hide();
+        }
+        hash = hash || [];
+        hash.push({
+            id : id,
+            menuStyle: $.extend({}, defaults.menuStyle, options.menuStyle || {}),
+            itemStyle: $.extend({}, defaults.itemStyle, options.itemStyle || {}),
+            itemHoverStyle: $.extend({}, defaults.itemHoverStyle, options.itemHoverStyle || {}),
+            bindings: options.bindings || {},
+            shadow: options.shadow || options.shadow === false ? options.shadow : defaults.shadow,
+            onContextMenu: options.onContextMenu || defaults.onContextMenu,
+            onShowMenu: options.onShowMenu || defaults.onShowMenu,
+            eventPosX: options.eventPosX || defaults.eventPosX,
+            eventPosY: options.eventPosY || defaults.eventPosY
+        });
+
+        var index = hash.length - 1;
+        $(this).bind('contextmenu', function(e) {
+            // Check if onContextMenu() defined
+            var bShowContext = (!!hash[index].onContextMenu) ? hash[index].onContextMenu(e) : true;
+            if (bShowContext) display(index, this, e, options);
+            return false;
+        });
+        return this;
+    };
+
+    function display(index, trigger, e, options) {
+        var cur = hash[index];
+        content = $('#'+cur.id).find('ul:first').clone(true);
+        content.css(cur.menuStyle).find('li').css(cur.itemStyle).hover(
+            function() {
+                $(this).css(cur.itemHoverStyle);
+            },
+            function(){
+                $(this).css(cur.itemStyle);
+            }
+        ).find('img').css({verticalAlign:'middle',paddingRight:'2px'});
+
+        // Send the content to the menu
+        menu.html(content);
+
+        // if there's an onShowMenu, run it now -- must run after content has been added
+		// if you try to alter the content variable before the menu.html(), IE6 has issues
+		// updating the content
+        if (!!cur.onShowMenu) menu = cur.onShowMenu(e, menu);
+
+        $.each(cur.bindings, function(id, func) {
+            $('#'+id, menu).bind('click', function(e) {
+                hide();
+                func(trigger, currentTarget);
+            });
+        });
+
+        menu.css({'left':e[cur.eventPosX],'top':e[cur.eventPosY]}).show();
+    
+        if (cur.shadow) shadow.css({width:menu.width(),height:menu.height(),left:e.pageX+2,top:e.pageY+2}).show();
+        $(document).one('click', hide);
+    }
+
+    function hide() {
+        menu.hide();
+        shadow.hide();
+    }
+
+    // Apply defaults
+    $.contextMenu = {
+        defaults : function(userDefaults) {
+            $.each(userDefaults, function(i, val) {
+                if (typeof val == 'object' && defaults[i]) {
+                    $.extend(defaults[i], val);
+                }else defaults[i] = val;
+            });
+        }
+    };
+})(jQuery);
+
+$(function() {
+    $('.contextMenu').hide();
+});
+
+</script>
+
+<script>
+
+    var modloading=new Object();
+    var compTemplateCache;
+    
+    //绑定属性页
+    function bindPropertiesPage(compId){
+        
+        var contenttype = '';
+        var formDataSoureId = "f8674abbd80547b39d4a0b0ef30749a0";
+        var value = {
+            dataSoureId  : formDataSoureId,
+            orderbysql   : " order by sn "
+        }
+
+        Platform.srv("sys-cmssetting-service.getTransferTree", [value], function(response){
+
+            var builder = new Ext.ml.CategoryBuilder({
+                data: response,
+                noShowGrid: true,
+                fn: function(values){
+        	        var menuid =values.attributes.id;
+        	        
+        	        var params ={
+        	            templateid:compId,
+        	            menuid:menuid,
+        	            limits:10
+        	        };
+        	        
+        	        Ext.Ajax.request({
+                        url: '/sys/service/CmsService.bindCompToMenu',
+                        params: params,
+                        method: 'POST',
+                        success: function(value){
+                            initCompContent();
+                            builder.close();
+                        }
+                    });
+                }
+            });
+            builder.on('createNode', function (loader, attr) {
+            if (attr.active == "0") {
+                attr.icon = '/sysicons/sys_toolbar/cross.gif';
+            }else if (attr.showtype == "image") {
+                attr.icon = '/sysicons/sys_nav/pic-13.gif';
+            }else if (attr.showtype == "text") {
+                attr.icon = '/sysicons/sys_toolbar/number.gif';
+            }
+            });
+            
+            builder.show();
+        });
+    }
+    
+    
+    //页面编辑
+    function initHomeEditor(){
+
+        $("body").append("<div class='contextMenu' id='setupMenu'><ul><li id='setup'>设置</li></ul></div>");
+        
+        $("[compid]").hover(function(){
+            $(this).addClass("selectComplent");
+        },function(){
+            $(this).removeClass("selectComplent");
+        })
+        
+        $("[compid]").contextMenu("setupMenu",{
+            bindings:{
+                setup:function(item){
+                    bindPropertiesPage(item.attributes["compid"].value);
+                }
+            }
+        })
+    }
+    
+    $(document).ready(function(){
+        initCache();
+        initCompContent();
+    })
+    
+    function initCache(){
+        compTemplateCache = new Object();
+        $("[compid]").each(function(){
+            var me = $(this);
+            var relist = me.find("[relist]");
+            compTemplateCache[me.attr("compid")] = relist.clone();
+        });
+    }
+    
+    function filldata(obj,relist,data){
+        var menuTitle = data.menu[0].name;
+        obj.find("[modtitle]").empty().append(menuTitle);
+        obj.find("[relist]").empty();
+        var showway = data.menu[0].showway;
+        var renderWay = "";
+        obj.find("[renderUrl]").each(function(){
+            var item = $(this);
+            var urlType = item.attr("renderUrl");
+            var vid = 'sys-cms-index9.second.html';
+            renderWay = item.attr("renderWay");
+            if(urlType == "level2Url"){
+                var type = item.attr("type"); 
+                var id = data.menu[0].id;
+                var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=" + vid + "&menuId=" + id + "&type="+type+"&showway=" + showway + "&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=" + menuTitle;
+                if(renderWay=="PartialRefresh"){
+                    item.attr("href","javascript:renderPartialRefreshHTML('"+url+"');");
+                }else{
+                    item.attr("href",url);
+                }
+            }else if(urlType == "level3Url"){
+                if(data.list && data.list.length>0){
+                    var dataJson = data.list[0];
+                    var id = dataJson.id;
+                    vid = 'sys-cms-index9.three.html';
+                    var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=" + vid + "&menuId=" + id + "&showway=" + showway + "&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=" + menuTitle+ "&contentId=" + id;
+                    if(renderWay=="PartialRefresh"){
+                        item.attr("href","javascript:renderPartialRefreshHTML('"+url+"');");
+                    }else{
+                        item.attr("href",url);
+                    }
+                }
+                
+            }     
+        })
+        
+        
+        
+        if(data.list && data.list.length>0){
+
+            for(var i=0; i<data.list.length; i++){
+                
+                var divPart = relist.clone();
+                var dataJson = data.list[i];
+                if(i==0&&obj.attr("compid")=="lw_mod_news"){
+                    
+                       var vid = 'sys-cms-index9.three.html';
+                          var title=dataJson.title;
+                        // var tips=dataJson.title;
+                         // if($("#titles").attr("size")&&title.lenth>parseInt($("#titles").attr("size"))) title = title.substring(0,parseInt($("#titles").attr("size")));
+                         // if($("#tips").attr("size")&&tips.lenth>parseInt($("#tips").attr("size")))   tips = tips.substring(0,parseInt($("#tips").attr("size")));
+                         // if( $("#titles").attr("size")) value = value.substring(0,parseInt(item.attr("size")));
+                    if(title.length>18){
+                       title = title.substring(0,18);
+                    }
+                    
+                    if(obj.attr("renderWay")=="PartialRefresh"){
+                        var url = "javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=" + vid + "&contentId=" + dataJson.id+"');" ;
+                    }else{
+                        var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=" + vid + "&contentId=" + dataJson.id;
+                    }
+                       
+                      var tipUrl = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=" + dataJson.id
+                       var titles="<a href="+tipUrl+" target=_blank>"+title+"</a>";
+                            var   tips;
+                              if(dataJson.digest){
+                                   var digest =dataJson.digest;
+                                   if(digest.length>50){
+                                       digest = digest.substring(0,50);
+                                   }
+                                   tips=digest+"&nbsp&nbsp<a href="+tipUrl+" target=_blank>详细>></a>";
+                              } else 
+                                tips=title+"&nbsp&nbsp<a href="+tipUrl+" target=_blank>详细>></a>";
+                      $("#titles").html(titles);
+                      $("#tips").html(tips);
+                  }
+                
+                //填写内容
+                divPart.find("[field]").each(function(){
+                    var item = $(this);
+                    var value = dataJson[item.attr("field")];
+                    if(item.attr("field")=="attachCount"){
+                        if(value=="0"){ 
+                            item.before("无");
+                            item.remove();
+                            return;
+                        }else{
+                            item.attr("href","/sys/service/sys-efile-service.downloadEFiles?pk_id="+dataJson.id);
+                            item.empty().append("下载("+value+")");
+                        }
+                        return;
+                    }
+                    if(item.attr("size")) value = value.substring(0,parseInt(item.attr("size")));
+                    item.empty().append(value);
+                });
+                
+                //SRC渲染
+                divPart.find("[renderSrc]").each(function(i){
+                    var item = $(this);
+                    var urlType = item.attr("renderSrc");
+                    var id = dataJson.id;
+                    var menuid = dataJson.menuid;
+                    
+                    if(urlType=="imageSrc"){
+   
+                        item.attr("src",
+                            "/sys/service/sys-cmssetting-service.outputContentImage?id="+id)
+                    }else if(urlType=="imageSrc2"){
+   
+                        item.attr("src",
+                            "/sys/service/sys-cmssetting-service.outputContentImage?type=menu&id="+id)
+                    }
+                });
+                
+                
+                //地址渲染
+                divPart.find("[renderUrl]").each(function(){
+                    var item = $(this);
+                    var urlType = item.attr("renderUrl");
+                    var renderWay = item.attr("renderWay");
+                    var id = dataJson.id;
+                    var menuid = dataJson.menuid;
+                    var vid = 'sys-cms-index9.three.html';
+                    
+                    if(urlType == "level3Url"){
+                        var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=" + vid + "&contentId=" + id + "&showway=" + showway + "&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=" + menuTitle;
+                        if(renderWay=="PartialRefresh"){
+                            item.attr("href","javascript:renderPartialRefreshHTML('"+url+"');");
+                        }else{
+                            item.attr("href",url);
+                        }
+                    } else if(urlType == "level2Url"){
+                        
+                        var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=" + id + "&showway=" + showway + "&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=" + dataJson.name;
+                        if(renderWay=="PartialRefresh"){
+                            item.attr("href","javascript:renderPartialRefreshHTML('"+url+"');");
+                        }else{
+                            item.attr("href",url);
+                        }
+                    } else if(urlType == "hyperlink"){
+                          
+                             item.attr("href",dataJson.hyperlink);
+         
+                    } 
+                    
+                })
+                
+                obj.find("[relist]").append(divPart.children());
+            }
+            
+            if(obj.find("[renderSrc]").size()>0){
+                initAllPlugs();
+            }
+        }
+    }
+    
+    function setCompDatas(obj){
+        var compid = obj.attr("compid");
+        var relist = compTemplateCache[compid];
+        var limits = relist.attr("relist");
+        var type   = obj.attr("type");
+        
+        Ext.Ajax.request({
+            url: '/sys/service/CmsService.listBindCompInfo',
+            params: {limits:(limits?limits:10),compid:compid,type:type},
+            method: 'POST',
+            success: function(value){
+                var v = eval("(" + value.responseText + ")");
+                //处理列表
+                filldata(obj,relist, v.result);
+                //modloading[compid] = true;
+                //console.log(modloading);
+            },
+            complete:function(){
+                //modloading[compid] = true;
+                //console.log(modloading);
+            }
+        })
+        
+    }
+        
+    function initCompContent(){
+        var i=0;
+        $("[compid]").each(function(){
+            i++;
+            modloading.size = i;
+            modloading[$(this).attr("compid")] = false;
+            setCompDatas($(this));
+        })  
+    }
+</script>
+<script type="text/javascript">
+    var Cookies = Ext.util.Cookies;
+    $(document).ready(function(){
+        var storedName = getStoredName(),
+        storedPassword = getStorePassword(storedName),
+        userNameEl = Ext.get('userName'),
+        passwordEl = Ext.get('password'),
+        rememberPasswordEl = Ext.get('ex01'),
+        rememberPassword = storedName ? true : false;
+        userNameEl.dom.value = storedName;
+        if(storedPassword==null){
+            storedPassword="";
+        }
+        passwordEl.dom.value = storedPassword;
+        rememberPasswordEl.dom.checked = rememberPassword;
+        if (storedName) {
+            passwordEl.focus();
+        }
+        else {
+            userNameEl.focus();
+        }
+        userNameEl.on('blur', function () {
+            passwordEl.focus();
+        });
+    
+        userNameEl.on('change', function () {
+            var name = Util.trim(userNameEl.dom.value);
+            if (!name) {
+                return;
+            }
+            passwordEl.dom.value = getStorePassword(name);
+        });
+        $(".test2").click(function(){
+            $.XYTipsWindow({
+                ___title:"您需要登录才能继续以下操作！",
+    			___content:"id:testID",
+    			___width:"325",
+    			___height:"210",
+    			___showbg:true,
+    			___drag:"___boxTitle",
+    			___windowBgColor:"#000000",
+    			___windowBgOpacity:"0.5",
+    			___boxBdColor:"#000",
+    			___boxBdOpacity:"0.5",
+    			___boxWrapBdColor:"#ABABAB"
+    		});
+        });
+        
+        //获取页面安全生产提示
+        getTips();
+        //获取底部连接
+        getButtomLink();
+        $(":checkbox").iButton();
+        
+        $("#boxImg ul li:not(:first)").hide();
+        $("#box ul li").each(function(i){
+            $(this).click(function(){
+                $("#boxImg ul li").hide();
+                $($("#boxImg ul li")[i%($("#box ul li").length/3)]).fadeIn("slow");
+                })
+            })
+            
+        $('.search_blk_btn').unbind('click').click(function(){
+            var v=$("#querystring2").val();
+            if(!v){
+              alert("请输入您要搜索的关键字");    
+              return;   
+            }
+            renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-search.html&navText=搜索结果页面&type=same&searchKey='+v);
+        });
+        
+        $('#querystring2').on('keypress',function(event){ 
+             if(event.keyCode == 13)      
+             {  
+                var v=$("#querystring2").val();
+                if(!v){
+                  return;   
+                }
+                renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-search.html&navText=搜索结果页面&type=same&searchKey='+v);
+             }  
+        });
+    });
+    
+    //设为主页
+    function SetHome(obj, url) {
+        try {
+            obj.style.behavior = 'url(#default#homepage)';
+            obj.setHomePage(url);
+        } catch (e) {
+            if (window.netscape) {
+                try {
+                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch (e) {
+                    alert("抱歉，此操作被浏览器拒绝！\n\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'");
+                }
+            } else {
+                alert("抱歉，您所使用的浏览器无法完成此操作。\n\n您需要手动将【" + url + "】设置为首页。");
+            }
+        }
+    }
+    //加入收藏
+    function AddFavorite(title, url) {
+        try {
+            window.external.addFavorite(url, title);
+        } catch (e) {
+            try {
+                window.sidebar.addPanel(title, url, "");
+            } catch (e) {
+                alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请进入新网站后使用Ctrl+D进行添加");
+            }
+        }
+    };
+    //获取安全生产提示
+        function getTips(){
+        $.ajax({
+            type: "GET",
+            data:"",
+            type:'post',
+            cache:false,
+            dataType:'json',
+            url: "/sys/service/app-menhu-service.getTips",
+            success: function(r){
+                if (!r.success) {
+                    $("#safe_days_div").empty().append("安全生产0天");
+                    return ;
+                };
+                var startDate=r.result;
+                if(startDate!=""){
+                    var a = new Date(startDate).getTime();
+                    var b= new Date().getTime();
+                    var c = 60*60*24*1000;
+                    var res = (b - a)/c;
+                    var safeStr="安全生产<span>" + parseInt(res) + "</span>天"
+                    $("#safe_days_div").empty().append(safeStr);
+                }
+            }
+        })
+    };
+    //获取底部连接
+    function getButtomLink(){
+        var menuId="b0fe4c7c80fc4b47bfc472d2b72fc029"
+        $.ajax({
+            type: "GET",  
+            data:"menuId="+menuId+"&limit=10&page=1&orderbysql=order by sn ",
+            url: "/sys/service/sys-cmsshow-service.showSecondIndexGridPage",
+            success: function(r){
+                var linkStr="<p>通讯地址：内蒙古呼伦贝尔海拉尔区胜利大街29号 邮政编码：021008</p>"
+                linkStr+="<p>电话：0470-8550000 邮件：oayw@hnhlbe.com.cn</p>"
+                linkStr+="<p>Copyright 2014 华能呼伦贝尔能源开发有限公司版权所有 All Rights Reserved</p>"
+                if (!r.success){
+                    $("#footer_link_div").empty().append(linkStr);
+                }else{
+                    var linkList=r.result.result;
+                    if(linkList.length==0){
+                        $("#footer_link_div").empty().append(linkStr);
+                    }else{
+                        var linkListStr="<h2>"
+                        for(var i=0;i<linkList.length;i++){
+                            linkListStr+="<a href='#' onclick=showThreeIndex('"+linkList[i].id+"','"+linkList[i].title+"','"+(linkList[i].templateid||"")+"')>"+linkList[i].title+"</a>"
+                            if(i!=(linkList.length-1)){
+                                linkListStr+="&nbsp&nbsp|&nbsp&nbsp"
+                            }
+                        }
+                        if($isAdmin){
+                            linkListStr+="&nbsp&nbsp|&nbsp&nbsp<a href='/cms#'>管理员登陆</a>"
+                        }
+                        linkListStr+="</h2>"
+                        linkListStr+="<p>通讯地址：内蒙古呼伦贝尔海拉尔区胜利大街29号 邮政编码：021008</p>"
+                        linkListStr+="<p>电话：0470-8550000 邮件：oayw@hnhlbe.com.cn</p>"
+                        linkListStr+="<p>Copyright 2014 华能呼伦贝尔能源开发有限公司版权所有 All Rights Reserved</p>"
+                        $("#footer_link_div").empty().append(linkListStr);
+                    }
+                }
+            }
+        })
+    };
+    //打开三级门户页面
+    var threeIndex='sys-cms-index9.three.html';
+    function showThreeIndex(id,navText,templateid){
+        var r=$("#spanNavTextId").text();
+           r =''
+        if(templateid){
+            threeIndex = templateid;
+        }
+        var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid="+threeIndex+"&menuId=&contentId="+id+"&navText="+r;
+       
+        renderPartialRefreshHTML(url);
+        
+        //location.href=url;
+        //window.open(url);
+    };
+</script>
+<script>
+$LGU={};
+$userId=$LGU.$userId;
+$userName=$LGU.$userName;
+$isAdmin=$LGU.$isAdmin;
+$isDepartmentAdmin=$LGU.$isDepartmentAdmin;
+$isGroupAdmin=$LGU.$isGroupAdmin;
+$loginDepartment=$LGU.$loginDepartment;
+$loginDepartmentParents=$LGU.$loginDepartmentParents;
+$userData=$LGU.$userData;
+$applicationIdentity=$LGU.$applicationIdentity
+$userRoles=$LGU.$userRoles;
+$userDepts=$LGU.$departments;
+$primaryDepartmentId=$LGU.$primaryDepartmentId;
+$primaryDepartmentName=$LGU.$primaryDepartmentName;
+$primaryOrgId=$LGU.$primaryOrgId;
+$primaryOrgName=$LGU.$primaryOrgName;
+$userDepartmentChain=$LGU.$userDepartmentChain;</script>
+<script type="text/javascript" src="/sys/res/cms/ml/js/jquery.jqprint-0.3.js"></script> 
+<script type="text/javascript" src="/sys/res/cms/ml/js/jquery.text-ellipsis.js">;</script> 
+<script type="text/javascript" src="/sys/res/cms/ml/js/libs/prettify/prettify.js">;</script>
+<script type="text/javascript" src="/sys/res/cms/ml/js/jquery.slimscroll.js">;</script>
+<script type="text/javascript" src="/sys/res/cms/ml/js/jcarousellite.min.js">;</script>
+
+
+<!--弹出插件样式（必须） -->
+<link rel="stylesheet" href="/sys/res/cms/ml/plug_in/pop/pop.css" type="text/css" media="all" />
+<!--弹出插件js（必须） -->
+<script type="text/javascript" src="/sys/res/cms/ml/plug_in/pop/jquery.XYTipsWindow.min.2.8.js">;</script>
+
+<!-- 单选框插件 -->
+<link type="text/css" href="/sys/res/cms/ml/css/jquery.ibutton.css" rel="stylesheet" media="all" />
+<script type="text/javascript" src="/sys/res/cms/ml/js/jquery.ibutton.js">;</script>
+<link rel="stylesheet" type="text/css" href="/sys/res/cms/ml/css/jquery.ad-gallery.css">
+<script type="text/javascript" src="/sys/res/cms/ml/js/jquery.ad-gallery.js"></script>
+<!-- 引用系统组件 -->
+<script type="text/javascript">
+    function IsURL(str_url){ 
+    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"  
+    var re=new RegExp(strRegex);  
+    if (re.test(str_url)){ 
+        return true;  
+    }else{  
+        return false;  
+    } 
+} 
+function showSecondIndex(record,navText,menuId){  
+    if(record.showway==3){
+        var url = record.hyperlink;
+        if(url&&url.indexOf("http")!=-1){
+           window.open(url);
+           return;
+        }
+        else if(!IsURL(url)){
+           url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid="+record.hyperlink
+        }
+        if(record.opentype==2){
+            var html = '<iframe name="main_center_frame" id="main_content_frame" src="'+ url+'" width="100%" marginwidth="0" height="380" marginheight="0" scrolling="yes" frameborder="0"/>';
+            $("#mainData").html(html);
+        }else{
+            window.open(url);
+        }
+    }else{
+        if(navText){
+              var re = /-/g; // 创建正则表达式模式。
+              navText = navText.replace(re, ">"); // 用 ">" 替换 "-"。
+        }
+       
+        var vid = 'sys-cms-index9.second.html';
+        if(record.showway==2){
+            var contentid = record.contentid||"";
+            if(record.templateid)
+            {
+                vid = record.templateid+'&contentId='+contentid;
+            }else{
+                  vid = 'sys-cms-index9.three.html&contentId='+contentid;
+                
+            }
+            
+        }
+        var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid="+vid+"&menuId="+record.id+"&id="+record.id+"&navText="+navText
+        +"&showway="+record.showway;
+        
+        if(record.opentype==2){
+            window.location.href = url;
+        }else{
+            window.open(url);
+        }
+    }
+    
+}
+
+
+function showSecondPartialRefreshIndex(record,navText,menuId){
+    if(record.showway==3){
+        var url = record.hyperlink;
+        if(url&&url.indexOf("http")!=-1){
+           window.open(url);
+           return;
+        }
+        else if(!IsURL(url)){
+           url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid="+record.hyperlink
+        }
+        if(record.opentype==2){
+            var html = '<iframe name="main_center_frame" id="main_content_frame" src="'+ url+'" width="100%" marginwidth="0" height="380" marginheight="0" scrolling="yes" frameborder="0"/>';
+            $("#mainData").html(html);
+        }else{
+            window.open(url);
+        }
+    }else{
+        if(navText){
+              var re = /-/g; // 创建正则表达式模式。
+              navText = navText.replace(re, ">"); // 用 ">" 替换 "-"。
+              
+        }
+        var vid = 'sys-cms-index9.second.html';
+        if(record.showway==2){
+            var contentid = record.contentid||"";
+            if(record.templateid)
+            {
+                vid = record.templateid+'&contentId='+contentid;
+            }else{
+                  vid = 'sys-cms-index9.three.html&contentId='+contentid;
+                
+            }
+            
+        }
+        var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid="+vid+"&menuId="+record.id+"&id="+record.id+"&navText="+navText
+        +"&showway="+record.showway;
+        
+        if(record.opentype==2){
+            var cmsNav = $("#cms_nav_div_text");
+            var navs = cmsNav.find("a");
+            if(navs && navs.length >0){
+                for(var i=0;i<navs.length;i++){
+                    var navObj = $(navs[i]);
+                    if(record.name==navObj.text()){
+                        navObj.attr("class","selected");
+                    }else{
+                        navObj.attr("class","");
+                    }
+                }
+            }
+            renderPartialRefreshHTML(url);
+        }else{
+            window.open(url);
+        }
+    }
+}
+
+function cmsUrlEncode(o, pre){
+    var empty,
+        buf = [],
+        e = function(val){
+            val = val.replace(/[^\x00-\xff]+/g,function(v){return encodeURI(v)});
+            return encodeURIComponent(val);
+        };
+    Ext.iterate(o, function(key, item){
+        empty = Ext.isEmpty(item);
+        Ext.each(empty ? key : item, function(val){
+            buf.push('&', e(key), '=', (!Ext.isEmpty(val) && (val != key || !empty)) ? (Ext.isDate(val) ? Ext.encode(val).replace(/"/g, '') : e(val)) : '');
+        });
+    });
+    if(!pre){
+        buf.shift();
+        pre = '';
+    }
+    return pre + buf.join('');
+}
+
+function renderPartialRefreshHTML(url,params){
+    params = params || {};
+    if(Ext.isString(params)){
+        params = Ext.decode(params);
+    }
+    if(!Ext.isArray(params)){
+        params = [params];
+    }
+    url=url.replace(/[^\x00-\xff]+/g,function(v){return encodeURI(v)});
+    MW.srv({
+        url: url,
+        json: false,
+        params : params,
+       //waitMsg: "视图加载中, 请稍候 ...",
+        success: function(r)
+        {
+            if(!r)
+            {
+                return null;
+            }
+            $("#renderContent").empty().append(r);
+        }
+    });
+}
+
+
+function logout(){
+    Platform.srv("sys-dict-service.getDict",[{catalog:"CMS系统/接口管理",name:"服务器IP"}],function(v){
+        if(v){
+            var oaurl="http://"+v;
+            Platform.srv("sys-dict-service.getDict",[{catalog:"CMS系统/接口管理",name:"服务器PORT"}],function(v){
+                if(v){
+                    oaurl=oaurl+":"+v;
+                }
+                oaurl=oaurl+"/names.nsf?logout";
+                if(oaurl){
+                    $.ajax({ 
+                        url: oaurl, 
+                        context: document.body,
+                        dataType : 'script', 
+                        success:function(){
+                           logoutCms();
+                        }
+                    });
+                }
+            });
+        }else{
+            logoutCms();
+        }
+    });
+}
+function logoutCms(){
+    $.ajax({
+        url:'/sys/service/sys-log-service.saveLogoutLog?radium='+Math.round(Math.random()*10000),            
+        complete: function(r){        	
+            location.href='/logout';
+        }
+    });
+}
+
+function adLogin(){
+	
+	   $.ajax( {
+		type : "get",
+		url : "/sys/service/sys-ad-sso-service.adLogin",
+		 success: function(r)
+        {   
+           window.location.href = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.html";
+        
+        }
+	});
+}
+
+function encode(a) {
+    return encodeURIComponent(a);
+}
+
+function decode(a) {
+    return decodeURIComponent(a);
+}
+//在cookies中保存用户登录账号
+function setCookie(name,value,expireDays){
+	 var date = new Date();
+        var expireDays = expireDays;
+        date.setTime(date.getTime() + expireDays * 24 * 3600 * 1000);
+        Cookies.set(name, value, date);
+}
+function getStoredName() {
+    var userName = Cookies.get("AMS_CY_USER_NAME");
+    if (userName == null)return "";
+    userName = decode(userName);
+    return MW.trim(userName);
+}
+
+function getStorePassword(userName) {
+    if (userName == null)return "";
+    userName = encode(userName);
+    var psw = Cookies.get(userName + '_PASSWORD');
+    if(psw==""||psw==null) return "";
+    psw = decode(psw);
+    return userName ? MW.trim(psw) : null;
+    return '';
+}
+
+function storeUserName(userName) {
+    userName = encode(userName);
+    setCookie('AMS_CY_USER_NAME', userName,360);
+}
+
+function storePassword(password, userName) {
+    userName = encode(userName);
+    password = encode(password);
+    setCookie(userName + '_PASSWORD', password,360);
+}
+
+function clearStoreCookies() {
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+    	var eqPos = cookie.indexOf("=");
+    	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        if(name!=""&&name.indexOf("_PASSWORD")!=-1){
+    	    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        }
+    }
+}
+function loadMLBrower(cfg){
+        var eLinkId = cfg.eLinkId || "";
+        var pk_id = cfg.pk_id || "";
+        var efileId = cfg.efileId || "";
+        var waterMarkStr = cfg.waterMarkStr || "";
+        var width = cfg.width || 770;
+        var height = cfg.height || 450;
+        var swfUrl = "/sys/res/swf/MLBrower.swf";
+        var href = location.protocol+"//"+location.host+"/sys";
+        if (href.indexOf('#', href.length - 1) != -1) {
+            href = href.substring(0, href.length - 1);
+        }
+        var crossdomainUrl = href + "/res/swf/crossdomain.xml";
+        crossdomainUrl = encodeURIComponent(crossdomainUrl);
+        var flashvars = 'crossdomainUrl=' + crossdomainUrl;
+        var fileUrl = href + "/service/sys-efile-service.listMLBrowerData?jsonData=[{id:'" + eLinkId + "',pk_id:'" + pk_id+ "',efileId:'"
+        +efileId+"',isAuthControl:'false',dc:'',waterMarkStr:'"+waterMarkStr+"'}]";
+    
+        var OpenFileUrl= href + "?$$vid=view-browser-window-loader"
+            +"&vid=unified-browser-url-attachment.js&pk_id="
+            +pk_id+"&title="+encodeURIComponent("统一浏览器")+"&waterMarkStr="+encodeURIComponent(waterMarkStr);
+        var dowloadUrls = href + "/service/sys-efile-service.downloadEFiles";
+        fileUrl = encodeURIComponent(fileUrl);
+        flashvars += "&FileXmlUrl="+fileUrl;
+        flashvars += "&dowloadUrls="+dowloadUrls;
+        flashvars += "&IsDownload=false";
+        flashvars += "&IsAuthControl=false";
+        flashvars += "&OpenFileUrl=" + OpenFileUrl;
+        flashvars += "&IsOneFile=true";
+        flashvars += "&ShowPrint=false";
+        var swfversion = "11.1.0";
+        //for tmpl
+        var isIE = Ext.isIE;
+        var templateHtml = '<embed type="application/x-shockwave-flash" '
+            + '	 src="' + swfUrl + '" '
+            + '	 width="'+width+'" height="'+height+'" '
+            + '	 id="{swfId}" name="{swfId}" '
+            + '	 bgcolor="#000000" quality="high" wmode="opaque" menu="false" '
+            + '	 allowfullscreen="true" '
+            + '	 allowscriptaccess="always" '
+            + '	 allownetworking="all" '
+            + '	 swfversion="' + swfversion + '" '
+            + '	 flashvars="' + flashvars + '">'
+            + ' </embed>';
+        if (isIE) {
+            templateHtml = '<object id="{swfId}" name="{swfId}" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+width+'" height="'+height+'">'
+                + '	<param name="movie" value="' + swfUrl + '"/>'
+                + '	<param name="allowfullscreen" value="true"/>'
+                + '	<param name="allowscriptaccess" value="always"/>'
+                + '	<param name="allownetworking" value="all"/>'
+                + '	<param name="bgcolor" value="#000000"/>'
+                + '	<param name="quality" value="high"/>'
+                + '	<param name="wmode" value="opaque"/>'
+                + '	<param name="swfversion" value="' + swfversion + '" />'
+                + '	<param name="flashvars" value="' + flashvars + '" />'
+                + '</object>';
+        }
+        document.write(templateHtml);
+    }
+    
+    function loadVideo(efileId,width,height){
+        width || 697;
+        height = height || 454;
+        AC_FL_RunContent(
+            'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+            'width', width,
+            'height', height,
+            'src', 'jcplayer',
+            'quality', 'high',
+            'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+            'align', 'middle',
+            'play', 'true',
+            'loop', 'true',
+            'scale', 'noScale',
+            'wmode', 'window',
+            'devicefont', 'false',
+            'id', 'jcplayer',
+            'bgcolor', '#ffffff',
+            'name', 'jcplayer',
+            'menu', 'false',
+            'allowFullScreen', 'true',
+            'allowScriptAccess','sameDomain',
+            'FlashVars','videoURL=/sys/service/sys-cmssetting-service.outputContentImage?id='+efileId+'&autoPlay=ture&backgroundColor1=0x333333&backgroundColor2=0x222222',
+            'movie', '/sys/res/Amsearchresult/jcplayer',
+            'salign','TL'
+        );
+    }
+
+function login(){
+    var lgid = $("#userName").val();
+    var psw = $("#password").val();
+    lgid = Util.trim(lgid),
+    psw = Util.trim(psw);
+    if (!lgid || !psw) {
+        alert("请输入用户名及密码");
+        return;
+    }
+    var rememberPasswordEl = Ext.get('ex01');
+    var rememberPassword = rememberPasswordEl.dom.checked;
+    if (!rememberPassword) {
+        clearStoreCookies();
+    }
+    Util.srv({
+        url: '/sys/service/app-menhu-service.getLogin',
+        args: [{username:lgid,password:psw}],
+        success: function(r)
+        {
+        
+            if(true == r.success)
+            
+            {   
+                var oaurl;
+                if(r.ip){
+                    oaurl="http://" + r.ip + ":" + r.port + "/names.nsf?login&username=" + lgid + "&password=" + psw;
+                    var dpsw="123456";
+                }
+                else{
+                    var dpsw=psw;
+                }
+                
+                Util.srv({
+                    url: '/service/auth-service.authenticate',
+                    args: [lgid, dpsw, null],
+                    success: function(r)
+                    {
+                        if(true == r)
+                        {
+                            if (rememberPassword) {
+                                storePassword(psw, lgid);
+                            }
+                            storeUserName(lgid);
+                            if(oaurl){
+                                $.ajax({ 
+                                    url: oaurl, 
+                                    context: document.body,
+                                    dataType : 'script', 
+                                    success:function(){
+                                        window.location.reload();
+                                    }
+                                });
+                            }else{
+                                window.location.reload();
+                            }
+                           // window.location.href = "/sys/?$$vid=sys-cms-index9.html";
+                        }else{
+                            alert("您输入的密码不正确，请重新确认!");
+                        }
+                    },
+                    failure: function(r)
+                    {   
+                        if(r.msg){
+                            var startPos = r.msg.indexOf("Exception")+10;
+                            var endPos = r.msg.lastIndexOf("\n");
+                            if(endPos > startPos){
+                                var tipMsg = r.msg.substring(startPos,endPos);
+                                alert(tipMsg);
+                            }else{
+                                alert("与服务器交互遇到错误，请与管理员联系!");
+                            }
+                        }else{
+                            alert("与服务器交互遇到错误，请与管理员联系!");
+                        }
+                    }
+                });
+            }else{
+                alert("您输入的密码不正确，请重新确认!");
+            }
+        },
+        failure: function(r)
+        {   debugger;
+            alert("您输入的密码不正确，请重新确认!");
+        }
+    });
+}
+function dosearchHotWord(word,servicePath)
+   {
+       $("#querystring").val(word);
+       dosearch(servicePath);
+   }
+function  dosearch(servicePath, page){
+        if($(".test2")[0]){
+            $(".test2")[0].click();
+        }else{
+            alert("请登录!");
+        }
+        return;
+    if(!servicePath){
+        servicePath = "/cms/service";
+    }
+    var keyvalue = $("#key").val();
+    var q=$("#querystring").val();
+    searchSubmit(servicePath, q, keyvalue, page);
+}
+var fileLimit = 10;
+var picLimit = 8;
+var picDetailLimit = 7;
+var videoLimit = 8;
+function searchSubmit(servicePath, q, keyvalue, page){
+    if(q==''||q==null||q=='请输入您要搜索的关键字'){
+        return;
+    }
+    keyvalue = keyvalue || "";
+    var application=$("#database").val();
+    if(application=="" || application==undefined){  //这个是根据莫真福的说法修改的
+        application="CMS";
+    }
+    var type=$("#type").val();
+    if(type=="" || type=="undefined"){  //这个是根据莫真福的说法修改的
+        type="FILE";
+    }
+    var database="";
+    if(application=="CMS"){
+        type="CMSFILE";
+    }else{
+        application="OA";
+        type="OAFILE";
+    }
+    var ToType=$("#ToType").val();
+    Util.srv({
+        url: '/sys/service/sys-es-schema-service.listDatabase',
+        args: [{type:'',application:application}],
+        success: function(v){
+            if(v.length===0){
+                Ext.Msg.alert("系统提示","找不到索引库");
+                return;
+            }
+            var application=v[0].application;
+            var database=v[0].name;
+            //var type='FILE';
+            var limit = 10;
+            var method="";
+            if(ToType=="file"){
+                limit = 10;
+                method="getArchiveSearchFile";
+            }else if(ToType=="picture"){
+                limit = 12;
+                method="getArchiveSearchPicture";
+            }else if(ToType=="video"){
+                limit = 8;
+                method="getArchiveSearchVideo";
+            }
+            var params="q="+encodeURIComponent(q)+"&application="+application+"&database="+database+"&key="+keyvalue+"&type="+encodeURIComponent(type)+"&ToType="+ToType+"&limit="+limit+"&page=1";
+            var url=servicePath+"/ams-search-resultservice."+method+"?"+params;
+           // window.open (url,'','width='+(window.screen.availWidth-10)+',height='+(window.screen.availHeight-30)+ ',top=0,left=0,toolbar=yes,menubar=yes,scrollbars=yes, resizable=yes,location=yes, status=yes');
+            window.open (url);
+        }
+    
+    })
+    
+     
+       // if(keyvalue=="" || keyvalue=="undefined"){  //这个是根据莫真福的说法修改的
+       //  keyvalue="";
+    // }
+     
+    /*var params = "q="+encodeURIComponent(q)+"&key="+keyvalue+"&application="+application+"&database="+database+"&type="+type;
+    page = page || "0";
+    params = params+"&page="+page;
+    
+
+    if(ToType=="file"){
+        //可能从高级搜索传来这个，所有增加了这个判断，默认就为10
+        if(document.getElementById("fileLimit"))
+        fileLimit=document.getElementById("fileLimit").value;
+        post(servicePath, 'getArchiveSearchFile', params+"&limit="+fileLimit);
+    }
+    if(ToType=="picture"){
+        post(servicePath, 'getArchiveSearchPicture', params+"&limit="+picLimit);
+    }
+    if(ToType=="video"){
+        post(servicePath, 'getArchiveSearchVideo', params+"&limit="+videoLimit);
+    }*/
+}
+
+function post(servicePath, method, params){
+    var url = servicePath+"/ams-search-resultservice."+method+"?"+params;
+    window.open(url);
+}
+
+$(function(){
+    
+    var userNameEl = Ext.get('userName');
+    var passwordEl = Ext.get('password');
+    var querystringEl =Ext.get('querystring');
+    if(userNameEl){
+        userNameEl.on('keypress', function (e) {
+            if ((e.getKey && 13 == e.getKey()) || e.keyCode == 13) {
+               passwordEl.focus();
+            }
+        });
+    }
+    if(passwordEl){
+        passwordEl.on('keypress', function (e) {
+            if ((e.getKey && 13 == e.getKey()) || e.keyCode == 13) {
+                login();
+                return;
+            }
+        });
+    }
+    if(querystringEl){
+        querystringEl.on('keypress', function (e) {
+            if ((e.getKey && 13 == e.getKey()) || e.keyCode == 13) {
+                dosearch()
+                return;
+            }
+        });
+    }
+     var search_text =  Ext.get('search_text');  //首页模板三的属性
+                   if(search_text){
+                    search_text.on('keypress', function (e) {
+                 if ((e.getKey && 13 == e.getKey()) || e.keyCode == 13) {
+                    
+                    var  servicePath = "/sys/service";
+                  
+                var keyvalue = $("#key").val();
+                var q=$("#search_text").val();
+                 
+                searchSubmit(servicePath, q, keyvalue, 0);
+            }
+        });
+    }
+});
+    /**数据源操作js*/
+(function () {
+    Ext.ns("Platform");
+    Platform.ds = {};
+    Ext.apply(Platform.ds, {
+        /**
+         * 内部使用函数，实际上去调用后台的代码
+         */
+        srv: function (ds, params, successCallback, failureCallback) {
+            var me=this;
+            if (!Ext.isArray(params)){params=[params];}
+            var config={};
+            if (Ext.isObject(failureCallback)){
+                config=failureCallback;
+                failureCallback=config.failureCallback;
+            }
+            var dsUrl = "/sys/ds?$$vid="+ds+"&$CMD="+this.cmd;
+            MW.srv({
+                url: dsUrl,
+                args: params,
+                sync:config.sync,
+                success: function (r) {
+                    if (successCallback) {
+                        if (Ext.isFunction(successCallback)) {
+                            successCallback.call(me,r);
+                        }
+                    }
+                },
+                failure: function () {
+                    if (Ext.isFunction(failureCallback)) {
+                        failureCallback.call(me);
+                    }
+                },
+                waitMsg: "处理中，请稍候 ... "
+            });
+        },
+        /**
+         * 内部使用函数，转接各种操作命令
+         */
+        proxy: function(cmd,args) {
+            this.cmd=cmd;
+            this.srv.apply(this,args);
+        },
+        /**
+         * 查找数据源
+         * ds:数据源的ID或者路径(路径=分类+名称)
+         * params: 直接用{owner:'sys'}类型时，指定数据源里面用来查找的参数.
+         * callback:回调函数，接收查找到的记录作为参数
+         */
+        query: function (ds,params,callback,config) {
+            if (!Ext.isArray(params)){
+                params=[params,0,1000];
+            }
+            this.proxy('query',[ds,params,callback,config]);
+        },
+        /**
+         * 取分页数据，和query不同是会包括totalCount等分页信息
+         * ds:数据源的ID或者路径(路径=分类+名称)
+         * params: 直接用{owner:'sys'}类型时，指定数据源里面用来查找的参数.
+         * callback:回调函数，接收查找到的记录作为参数
+         */
+        paging: function (ds, params) {
+            this.proxy('paging',arguments);
+        },
+        /**
+         * 保存数据源，id相同则更新,没有则新建
+         * ds:数据源的ID或者路径(路径=分类+名称)
+         * params: 要保存的记录，格式如{id:'aaa',fldaa:'aaaa',fldbb:'bbbb'}
+         */
+        save: function (ds, params) {
+            this.proxy('save',arguments);
+        },
+        //删除,请用下面的remove,这个只是留下来兼容旧代码,如果死都要用delete的话请写成: Platform.ds['delete']
+        'delete': function (ds, params,callback) {
+            var firstArg=Ext.isArray(params)?params[0]:params;
+            var cmd=Ext.isString(firstArg)?"delete":"c-delete";
+            this.proxy(cmd,arguments);
+        },
+        /**
+         * 删除
+         * ds:数据源的ID或者路径(路径=分类+名称)
+         * params:要删除的数据.
+         * Platform.ds.remove(dsId,"uuid");
+         * Platform.ds.remove(dsId,[["uuid1","uuid2"]]);
+         * Platform.ds.remove(dsId,{deleteFlag:"1"})
+         */
+        remove:function (ds, params) {
+            var firstArg=Ext.isArray(params)?params[0]:params;
+            var cmd=Ext.isObject(firstArg)?"c-delete":"delete";
+            this.proxy(cmd,arguments);
+        },
+        /**
+         * 批量更新,直接调用的是数据源的更新语句，需要数据源更新语句的支持
+         * Platform.ds.update(dsId,{'w$WhereFieldIs':"1",'setFieldTo':'SYS'});
+         */
+        update:function(){
+            this.proxy('update',arguments);
+        },
+        count:function(){
+            this.proxy('count',arguments);
+        }
+    });
+})();;
+</script>
+
+<!-- 头部工作条 -->
+<div class="cms_top_bar">
+    <div class="main_width">
+        <div class="right_link">
+            <a href = "javascript:void(0);" onclick = "SetHome(this,window.location);" >设为主页</a> | 
+            <a href = "javascript:void(0);" onclick = "AddFavorite('华能呼伦贝尔能源开发有限公司',window.location)">加入收藏</a> 
+        </div>
+            <a class="login_link test2" href="#">登录</a>后，您将能进行更多的操作！
+    </div>
+</div>
+<!-- 点击【登陆】按钮，弹出登陆框 -->
+<div id="testID" style="display:none; ">
+	<dl class="login_form">
+        <dt></dt>
+        <dd class="login_form_text"><span class="username"></span><input class="text_off" name="userName" id="userName" onfocus="this.className='text_on'" onblur="this.className='text_off'" type="text" /></dd>
+        <dd class="login_form_text"><span class="password"></span><input  class="text_off" name="password" id="password" onfocus="this.className='text_on'" onblur="this.className='text_off'" type="password" /></dd>
+        <dd>
+            <div class="row" style="float:left;">
+                <input type="checkbox" id="ex01" /> 
+            </div>
+            <div class="forget_pw_text">记住密码</div>
+        </dd>
+        <dd class="enter_system"><input onclick="login()" class="btn_off" onmouseover="this.className='btn_on'" onmouseout="this.className='btn_off'" type="submit" value="登录" id="freeow-show" /></dd>
+    </dl>
+</div>
+<!--首页相关提示和搜索-->
+<div class="main_width top_pad">
+   <div id="yc-mod-slider" class="cms_head_box">
+        <div class="wrapper" style="" >
+            <embed width="1120" height="176" align="left" quality="high" wmode="transparent" src="/sys/res/cms/ml/images/banner-top.swf" type="application/x-shockwave-flash"> 
+        </div>
+</div>
+<!--导航栏-->
+<div class="main_width clearfix" id="cms_nav_div">
+<div class="cms_nav">
+    <ul class="cms_nav_left" id="cms_nav_div_text">
+            <li><a class="selected" href="/sys?$$vid=sys-cms-index9.html">首&nbsp;&nbsp;页</a></li>
+                        <li><a href="#" onclick='showSecondPartialRefreshIndex({id:"5eec1a51cc564e7198e425fe46f26bd5",opentype:"2",showway:"1",hyperlink:"",showtype:"text",name:"公司简介"},"公司简介")'>公司简介</a></li>
+                        <li><a href="#" onclick='showSecondPartialRefreshIndex({id:"b21fbd85665c4461be2851518f5e12a1",opentype:"2",showway:"1",hyperlink:"",showtype:"text",name:"专栏专题"},"专栏专题")'>专栏专题</a></li>
+                        <li><a href="#" onclick='showSecondPartialRefreshIndex({id:"4dc35d70daf148d2af88200ff82de4b3",opentype:"2",showway:"1",hyperlink:"http://www.baidu.com",showtype:"text",name:"企业文化"},"企业文化")'>企业文化</a></li>
+                        <li><a href="#" onclick='showSecondPartialRefreshIndex({id:"e1077fd45bc6473da992aa7c0bb1cef1",opentype:"2",showway:"1",hyperlink:"",showtype:"text",name:"规章制度"},"规章制度")'>规章制度</a></li>
+                        <li><a href="#" onclick='showSecondPartialRefreshIndex({id:"80cd75e0b3b24b66be803b5f3b09157e",opentype:"2",showway:"1",hyperlink:"",showtype:"video",name:"企业管理"},"企业管理")'>企业管理</a></li>
+                        <li><a href="#" onclick='showSecondPartialRefreshIndex({id:"4920efbfa81c4fb89c03481847157fd7",opentype:"2",showway:"1",hyperlink:"",showtype:"report",name:"通讯录"},"通讯录")'>通讯录</a></li>
+   </ul>
+   
+        <div class="cms_nav_right">
+           <!--<div class="cms_search_bar">-->
+            <div class="search_blk">
+                <input id="ToType" type="hidden" value="file"/>
+                <input id="querystring2" class="search_blk_text" type="text" value="请输入您要搜索的关键字" onfocus="if (this.value == '请输入您要搜索的关键字') {this.value = '';}" onblur="if (this.value == '') {this.value = '请输入您要搜索的关键字';}">
+                <input type="button" class="search_blk_btn" value="">
+            <!--</div>-->
+            </div>
+        </div>
+  </div>     
+</div><!--局部刷新内容--> 
+<div id="renderContent">
+<link href="/sys/res/cms/ml/css/lrtk.css" rel="stylesheet" type="text/css" />
+<link href="/sys/res/cms/ml/css/zsucai.css" rel="stylesheet" type="text/css"/>
+<!--<script type="text/javascript" src="/sys/res/cms/ml/js/slide.js"></script>-->
+<script type="text/javascript" src="/sys/res/cms/ml/js/jquery.text-ellipsis.js"></script>
+<script type="text/javascript" src="/sys/res/cms/ml/js/koala.min.1.5.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      
+       //获取发电量，煤炭产量，煤炭销量数据
+       getDataList();
+       //获取公司新闻
+       // getNewsList();
+       //获取公告通知列表
+       getGongGaoList();
+       //获取应用链接
+       getLeftLink();
+       //获取业务部门
+       //getYwLink();
+       //获取专题活动
+       getZTLink();
+       //限制字符个数
+		$(".text_flow li a").each(function(){
+			var maxwidth=12;
+			if($(this).text().length>maxwidth){
+				$(this).text($(this).text().substring(0,maxwidth));
+				$(this).html($(this).html()+'...');
+			}
+		});
+		
+		$(".text_flow_hot li a").each(function(){
+			var maxwidth=16;
+			if($(this).text().length>maxwidth){
+				$(this).text($(this).text().substring(0,maxwidth));
+				$(this).html($(this).html()+'...');
+			}
+		});
+		
+		//获取常用下载文章
+		getDownArticle();
+		
+		//友情链接
+		getfriendlinks();
+		
+		$("#scsjmore").unbind('click').click(function(){
+		    var flddate=$(this).attr("flddate");
+		    renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-scsj.html&navText=生产数据&type=same&flddate='+flddate);
+		});
+    })
+</script>
+<!--首页正式内容上面部门-->
+<div class="main_body">
+<div class="main_width">
+<div class="index_concent clearfix">
+    <!--首页右侧开始-->
+    <div class="index_right">
+    <div class="pad_10">
+        <!--安全登陆-->
+            <div class="list_right_blk track">
+              <h2 class="title"><span class="more_1"></span><i>年内安全生产天数</i></h2>
+    			<div class="safe_day">173<span>天</span></div>
+            </div>
+        <!--通知公告-->        
+        <div class="list_right_blk2 Announcement" id="gonggao_list_div">
+        </div>
+        <script>
+            $(function(){
+                $(".list_data>li").each(function(i){  
+                    $(this).addClass("color"+(i%2));
+                })  
+            })
+        </script>
+    </div>
+    </div>
+    <!--首页右侧结束-->    
+    <style>
+        dl{clear:left;}
+        dt,dd{float:left;}
+        dt{width:200px;}
+    </style>
+    <!--首页左侧开始-->    
+    <div class="index_left">
+        <!--公司新闻-->
+        <div class="cms_news_blk">
+            <h2 class="title">
+                <span class="more">
+                    <a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=182a2949637d422f86b7567bfae528dd&navText=公司新闻&type=same");'>更多&gt;&gt;</a>
+                </span>
+                <i>公司新闻</i>
+            </h2>
+            <!--左侧新闻图片-->
+            <div class="news_pic border-shadow">
+            <div id="fsD1" class="focus">  
+            <!--获取图片-->
+            <div id="D1pic1" class="fPic"></div>
+            <div class="fbg">  
+                <div class="D1fBt" id="D1fBt" style="margin:4px 0px;">  
+                </div>  
+            </div>  
+            <span class="prev"></span>   
+            <span class="next"></span>
+            
+            <script type="text/javascript">
+                var i=0;
+                var topNews="";
+                var numStr="";
+                        if(i<5){
+                            i=i+1;
+                            topNews+='<div class="fcon" style="display: none;">'
+                            topNews+='<a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=5c4e087b2433406a83dbe2cd6c829acb"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=5c4e087b2433406a83dbe2cd6c829acb" style="opacity: 1; "></a>'
+                            topNews+='<span class="shadow"><a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=5c4e087b2433406a83dbe2cd6c829acb">2月7日，呼伦贝尔市市长张利平在公司副总...</a></span>'
+                            topNews+='</div>'
+                            
+                            numStr+='<a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>'+ i +'</i></a>'
+                        }
+                        if(i<5){
+                            i=i+1;
+                            topNews+='<div class="fcon" style="display: none;">'
+                            topNews+='<a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=3b2b70bf172340a38b2a362f82dc92d5"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=3b2b70bf172340a38b2a362f82dc92d5" style="opacity: 1; "></a>'
+                            topNews+='<span class="shadow"><a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=3b2b70bf172340a38b2a362f82dc92d5">2月5日，公司一届四次职代会暨2015年...</a></span>'
+                            topNews+='</div>'
+                            
+                            numStr+='<a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>'+ i +'</i></a>'
+                        }
+                        if(i<5){
+                            i=i+1;
+                            topNews+='<div class="fcon" style="display: none;">'
+                            topNews+='<a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=d6900443431140bf877f91d627afd2f8"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=d6900443431140bf877f91d627afd2f8" style="opacity: 1; "></a>'
+                            topNews+='<span class="shadow"><a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=d6900443431140bf877f91d627afd2f8">1月16日，公司在满洲里热电厂组织召开安...</a></span>'
+                            topNews+='</div>'
+                            
+                            numStr+='<a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>'+ i +'</i></a>'
+                        }
+                        if(i<5){
+                            i=i+1;
+                            topNews+='<div class="fcon" style="display: none;">'
+                            topNews+='<a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=a5e4cf1eb50445eda007c4722acb2dd4"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=a5e4cf1eb50445eda007c4722acb2dd4" style="opacity: 1; "></a>'
+                            topNews+='<span class="shadow"><a target="_blank" href="/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9-three-list.html&contentId=a5e4cf1eb50445eda007c4722acb2dd4">1月14日，公司副总经理侯玉一行先后深入...</a></span>'
+                            topNews+='</div>'
+                            
+                            numStr+='<a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>'+ i +'</i></a>'
+                        }
+                if(topNews){
+                    $("#D1pic1").empty().append(topNews);
+                }else{
+                    $("#D1pic1").empty().append("<img src='/sys/res/cms/ml/images/no_images.png' />");
+                }
+                $("#D1fBt").empty().append(numStr);
+            </script>
+            </div>
+            <script type="text/javascript">
+                Qfast.add('widgets', { path: "/sys/res/cms/ml/js/terminator2.2.min.js", type: "js", requires: ['fx'] });  
+                Qfast(false, 'widgets', function () {
+                    K.tabs({
+                        id: 'fsD1',   //焦点图包裹id  
+                        conId: "D1pic1",  //** 大图域包裹id  
+                        tabId:"D1fBt",  
+                        tabTn:"a",
+                        conCn: '.fcon', //** 大图域配置class       
+                        auto: 1,   //自动播放 1或0
+                        effect: 'fade',   //效果配置
+                        eType: 'click', //** 鼠标事件
+                        pageBt:true,//是否有按钮切换页码
+                        bns: ['.prev', '.next'],//** 前后按钮配置class                          
+                        interval: 3000  //** 停顿时间  
+                    }) 
+                })  
+            </script>
+            
+            </div>
+            <!--右侧新闻标题--> 
+            <div class="hot_news" compid="lw_mod_news" renderWay="PartialRefresh">
+                <h2 class="titles" >
+                    <span id="titles" size="18"></span>
+                    <span id="tips"  class="tips" size="4"></span>
+                </h2>
+                <ul class="list_style" relist="6">
+                    <li>
+                        <span class="list_date" style="font-size:12px" field="publictime" size="10"></span>
+                        <a href="#" field="title"  renderUrl="level3Url" renderWay="PartialRefresh" size="18"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--获取专题活动-->
+<div class="wrapper clearfix border-shadow" style="background-color:#efefef; height:120px;" compid1="lw_mod_018" type='childMenu'  id="wrapperClearfix"> 
+   
+</div>
+
+<!--首页正式内容下面部门-->
+<div class="contentWrap">
+    <!--左侧列表-->
+    <div class="contentWrap_left border-shadow">
+        <div  class="add_right_tit_bg"></div>
+        <div class="all-sort-list">
+            <div class="item" style="display:none">
+                <h3><span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_30.png);"></span><a href='javascript:renderPartialRefreshHTML("/sys?$$vid=sys-cms-index9.meeting.html");'>会议安排</a></h3>
+            </div>
+            <div class="item" style="display:none">
+                <h3><span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_30.png);"></span><a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=ec152f5153bb4cddb8a13f4ef8b90e1f&navText=通讯录&type=same");'>通讯录</a></h3>
+            </div>
+            
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=d1df10e154134813832ad0bdf29f7e8f&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=综合管理")'>综合管理</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=488f191bb8d148c7941541bf8414c268&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=安全管理")'>安全管理</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=0faa88be6a36488a9a4615be0ae7abd6&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=生产技术")'>生产技术</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=18a7771c271a4f8f9b5bcff5fd6fc395&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=煤炭管理")'>煤炭管理</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=f4c8b775a0794a2ca8ff967319ab7f6a&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=发展战略")'>发展战略</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=ca42fc534c8f4d75856e725cb5f0972a&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=基本建设")'>基本建设</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=12b80e687bd341a4900e39e90788fb14&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=人力资源")'>人力资源</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=e0f060e0ae3d4d9aaf0837a7caa5682f&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=监审之窗")'>监审之窗</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=6aa75cb4e7b04c9e94748b57e0966795&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=工会之窗")'>工会之窗</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=463753af2c554104981dfae1993ea552&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=纪检监察")'>纪检监察</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=7b73f85d20a04399a17639fc1ae7a34d&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=审计工作")'>审计工作</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=181c6481286c4a68b3a51d162b084f72&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=党群政工")'>党群政工</a>
+                                </h3>
+                                </div>
+                                <div class="item">
+                                <h3>
+                                <span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_28.png);"></span>
+<a href='javascript:renderPartialRefreshHTML("/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=8f0934287be0438a9319c52125afc208&showway=1&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=政策法规")'>政策法规</a>
+                                </h3>
+                                </div>
+            
+            <div class="item" style="display:none">
+                <h3><span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_30.png);"></span>
+                    <a class="login_link test2" href="#">公司领导预安排</a>
+            </div> 
+            
+            <div class="item" style="display:none">
+                <h3><span style="background-image:url(/sys/res/cms/ml/images/hulunbeier_29.png);"></span><a>业务部门</a></h3>
+                <div class="item-list clearfix" >
+                    <div class="close">x</div>
+                    <div class="subitem">
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+    </div>
+    <script type="text/javascript">
+        $("#trigger1").powerFloat();
+    </script>
+    <!--中间列表-->
+    <div class="contentWrap_main">
+    <div class="other_middle">
+        <div class="list_blk clearfix">
+        <div class="all_width_overflow">
+            <div class="list_panel_outside  border-shadow">
+                <!--公司动态-->
+                <div class="list_panel list_panel_line" compid="lw_mod_001" style="height:210px">
+                    <h2 class="title"><span class="more"><a href="#" renderUrl="level2Url" renderWay="PartialRefresh" type="same">更多&gt;&gt;</a></span><i modtitle="default"></i></h2>
+                    <div class="hidden_blk" style="display:none;">对不起，您要查看的模块暂无内容！</div>
+                    <ul class="list_style text_flow_hot" relist="6">
+                        <li> 
+                            <span class="list_date" style="font-size:12px" field="publictime" size="10"></span>
+                            <a href="#" field="title"  renderUrl="level3Url" renderWay="PartialRefresh" size="12"></a>
+                        </li>
+                    </ul>
+                </div>
+                <!--直通一线-->  
+                <div class="list_panel" compid="lw_mod_002" style="height:210px">
+                    <h2 class="title"><span class="more"><a href="#" renderUrl="level2Url" renderWay="PartialRefresh" type="same">更多&gt;&gt;</a></span><i modtitle="default"></i></h2>
+                    <div class="hidden_blk" style="display:none;">对不起，您要查看的模块暂无内容！</div>
+                    <ul class="list_style text_flow_hot" relist="6">
+                        <li> 
+                            <span class="list_date" style="font-size:12px" field="publictime" size="10"></span>
+                            <a href="#" field="title"  renderUrl="level3Url" renderWay="PartialRefresh" size="12"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list_panel_outside  border-shadow">
+                <!--周例会报-->
+                <div class="list_panel list_panel_line" compid="lw_mod_003" style="height:210px">
+                    <h2 class="title"><span class="more"><a href="#" renderUrl="level2Url" renderWay="PartialRefresh" type="same">更多&gt;&gt;</a></span><i modtitle="default"></i></h2>
+                    <div class="hidden_blk" style="display:none;">对不起，您要查看的模块暂无内容！</div>
+                    <ul class="list_style text_flow_hot" relist="6">
+                        <li> 
+                            <span class="list_date" style="font-size:12px" field="publictime" size="10"></span>
+                            <a href="#" field="title"  renderUrl="level3Url" renderWay="PartialRefresh" size="12"></a>
+                        </li>
+                    </ul>
+                </div>
+                <!--生产日报-->
+                <div class="list_panel" compid="lw_mod_004" style="height:210px">
+                    <h2 class="title"><span class="more"><a href="#" renderUrl="level2Url" renderWay="PartialRefresh" type="same">更多&gt;&gt;</a></span><i modtitle="default"></i></h2>
+                    <div class="hidden_blk" style="display:none;">对不起，您要查看的模块暂无内容！</div>
+                    <ul class="list_style text_flow_hot" relist="6">
+                        <li> 
+                            <span class="list_date" style="font-size:12px" field="publictime" size="10"></span>
+                            <a href="#" field="title"  renderUrl="level3Url" renderWay="PartialRefresh" size="12"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list_panel_outside">
+				   <div class="list_panel all_width_overflow">
+					 <h2 class="title"><span class="more"><a id="scsjmore" href="#">更多&gt;&gt;</a></span><i>生产数据</i></h2>
+                <div class="data">
+				  
+				  <table class="data_panel">
+					  <thead id="fdlthead">
+                      
+						  <tr><th colspan="9" id="scsjdate"></th></tr>
+                          <tr class="hr" colspan="9"></tr>
+						  <tr><th rowspan="13" class="data_name data_name_color1">发电量</th></tr>
+						  <tr>
+						  <th scope="col" class="th_color bold">项目</th>
+						  <th scope="col" class="th_color bold">日</th>
+						  <th scope="col" class="th_color bold">月计划</th>
+						  <th scope="col" class="th_color bold">月累计</th>
+						  <th scope="col" class="th_color bold">年计划</th>
+						  <th scope="col" class="th_color bold">年累计</th>
+						  <th scope="col" class="th_color bold">同比</th>
+						  <th scope="col" class="th_color bold">年完成率</th>
+						</tr>
+						  
+						  <tr>
+						  <th scope="row" class="th_color">单位</th>
+						  <th>万KWH</th>
+						  <th>万KWH</th>
+						  <th>万KWH</th>
+						  <th>万KWH</th>
+						  <th>万KWH</th>
+						  <th>万KWH</th>
+						  <th>%</th>
+						</tr>
+					
+					  
+					  </thead>
+					  
+					  <tfoot id="mtcltfoot">
+                      <tr class="hr" colspan="9"></tr>
+					     <tr><th rowspan="5" class="data_name data_name_color1" style="padding-bottom: 0px;padding-top: 0px;">煤炭销量</th></tr>
+						
+						<tr>
+						  <th scope="row" class="th_color">单位</th>
+						  <th>吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>%</th>
+						</tr>
+						
+						
+					  </tfoot>
+					  
+					  
+					  <tbody id="mtxltbody">
+                      <tr class="hr" colspan="9"></tr>
+						  <tr><th rowspan="8" class="data_name data_name_color1" style="padding-bottom: 0px;padding-top: 0px;">煤炭产量</th></tr>
+						<tr>
+						  <th scope="row" class="th_color">单位</th>
+						  <th>吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>万吨</th>
+						  <th>%</th>
+						</tr>
+						
+					  </tbody>
+					</table>
+
+				</div>
+          </div>
+			</div>   
+        </div>
+        </div>
+    </div>
+    </div>
+    <!--右侧数据-->
+    <div class="contentWrap_right">
+		<div class="fast_link">
+			<h2 class="title">快速链接</h2>
+			<ul>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=1194b5a358a94607b4246b8370764b95)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=3ac366a0fdcb4a16b6e3c54d272e7016)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=6a0d07597cb44b1d9d27e6c4d9a601a3)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=702c72ab0ae943e58e0c6a206dc42766)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=7ac1c8c4311b4132a13e98a1e23a5cdb)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=9ac61b1c05b84e949d0bb2c62f3c4252)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=c604c222cff943b48fc6b8375da42163)"></i><p>OA系统</p></a></li>
+                        <li><a href="http://192.168.5.114:8080/oa" target="_blank"><i style="background-image: url(/sys/service/sys-cmssetting-service.outputContentImage?id=f6c5639da28e4cabb7e7aa0d3c763343)"></i><p>OA系统</p></a></li>
+             
+			</ul>
+		</div>
+			
+		<div class="m_10"><a href="#"><img src="/sys/res/cms/ml/images/weiquan.png"></a></div>
+		<div class="m_10" id="cyljdownload"></div>
+		<div class="m_10">
+			<select class="web_link" id="friendlinks" onchange="window.open(this.options[this.selectedIndex].value,target='_blank')">
+				<option value="" selected="">友情链接</option>
+			</select>
+	
+		</div>
+  </div>
+</div>
+<!--首页底部开始-->
+<!--友情链接-->
+<div class="main_width">
+<div class="links color_links">
+    <h2 class="title">华能在呼伦贝尔</h2>
+    <div class="rollBox">
+     <div class="LeftBotton" onmousedown="ISL_GoUp()" onmouseup="ISL_StopUp()" onmouseout="ISL_StopUp()"></div>
+     <div class="Cont" id="ISL_Cont">
+      <div class="ScrCont">
+       <div id="List1">
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=08959dd10e6044deb4b5d092e31c02a9"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">安泰热电公司满洲里热电厂</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=5ac4fcd3b7a44a41926dc25a2bf4746d"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">阿荣旗光明热力有限责任公司</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=624c566423d34b7fbf5972d25e68dc1e"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">华能伊敏煤电有限责任公司</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=769317a9d08c4d39886751881fef4e8b"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">中国华能集团</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=8db010948b464f6395f3e3454cf93316"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">陈巴尔虎旗光明热力有限公司</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=9ffef9b26ec0476d8a52576659e9b920"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">安泰热电公司海拉尔热电厂</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=d89298b8e8d445cd8dae4e74bc5d6332"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">安泰热电公司牙克石热电厂</a></p></div>
+              </div>   
+                     <div class="pic">   
+                        <a href="javascript:renderPartialRefreshHTML('/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second-qyxxzs.html&navText=企业形象展示&type=same');"><img src="/sys/service/sys-cmssetting-service.outputContentImage?id=daad7d142ae04311b1f226805b0eadf1"/></a>
+                        <div class="filterbg02">  <p><a target="_blank" href="#">安泰热电公司东海拉尔发电厂</a></p></div>
+              </div>   
+        </div>
+       <div id="List2"></div>
+      </div>
+    </div>
+     <div class="RightBotton" onmousedown="ISL_GoDown()" onmouseup="ISL_StopDown()" onmouseout="ISL_StopDown()"></div>
+    </div>
+    <script language="javascript" type="text/javascript">
+        <!--//-->
+        //图片滚动列表 16css.com
+        var Speed = 1; //速度(毫秒)
+        var Space = 5; //每次移动(px)
+        var PageWidth = 185; //翻页宽度
+        var fill = 0; //整体移位
+        var MoveLock = false;
+        var MoveTimeObj;
+        var Comp = 0;
+        var AutoPlayObj = null;
+        GetObj("List2").innerHTML = GetObj("List1").innerHTML;
+        GetObj('ISL_Cont').scrollLeft = fill;
+        GetObj("ISL_Cont").onmouseover = function(){clearInterval(AutoPlayObj);}
+        GetObj("ISL_Cont").onmouseout = function(){AutoPlay();}
+        AutoPlay();
+        function GetObj(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval('document.all.'+objName)}}
+        function AutoPlay(){ //自动滚动
+         clearInterval(AutoPlayObj);
+         AutoPlayObj = setInterval('ISL_GoDown();ISL_StopDown();',3000); //间隔时间
+        }
+        function ISL_GoUp(){ //上翻开始
+         if(MoveLock) return;
+         clearInterval(AutoPlayObj);
+         MoveLock = true;
+         MoveTimeObj = setInterval('ISL_ScrUp();',Speed);
+        }
+        function ISL_StopUp(){ //上翻停止
+         clearInterval(MoveTimeObj);
+         if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0){
+          Comp = fill - (GetObj('ISL_Cont').scrollLeft % PageWidth);
+          CompScr();
+         }else{
+          MoveLock = false;
+         }
+         AutoPlay();
+        }
+        function ISL_ScrUp(){ //上翻动作
+         if(GetObj('ISL_Cont').scrollLeft <= 0){GetObj('ISL_Cont').scrollLeft = GetObj('ISL_Cont').scrollLeft + GetObj('List1').offsetWidth}
+         GetObj('ISL_Cont').scrollLeft -= Space ;
+        }
+        function ISL_GoDown(){ //下翻
+         clearInterval(MoveTimeObj);
+         if(MoveLock) return;
+         clearInterval(AutoPlayObj);
+         MoveLock = true;
+         ISL_ScrDown();
+         MoveTimeObj = setInterval('ISL_ScrDown()',Speed);
+        }
+        function ISL_StopDown(){ //下翻停止
+         clearInterval(MoveTimeObj);
+         if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0 ){
+          Comp = PageWidth - GetObj('ISL_Cont').scrollLeft % PageWidth + fill;
+          CompScr();
+         }else{
+          MoveLock = false;
+         }
+         AutoPlay();
+        }
+        function ISL_ScrDown(){ //下翻动作
+         if(GetObj('ISL_Cont').scrollLeft >= GetObj('List1').scrollWidth){GetObj('ISL_Cont').scrollLeft = GetObj('ISL_Cont').scrollLeft - GetObj('List1').scrollWidth;}
+         GetObj('ISL_Cont').scrollLeft += Space ;
+        }
+        function CompScr(){
+         var num;
+         if(Comp == 0){MoveLock = false;return;}
+         if(Comp < 0){ //上翻
+          if(Comp < -Space){
+           Comp += Space;
+           num = Space;
+          }else{
+           num = -Comp;
+           Comp = 0;
+          }
+          GetObj('ISL_Cont').scrollLeft -= num;
+          setTimeout('CompScr()',Speed);
+         }else{ //下翻
+          if(Comp > Space){
+           Comp -= Space;
+           num = Space;
+          }else{
+           num = Comp;
+           Comp = 0;
+          }
+          GetObj('ISL_Cont').scrollLeft += num;
+          setTimeout('CompScr()',Speed);
+         }
+        }
+</script>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    //获取公司新闻
+    function getNewsList(){
+        var menuId="182a2949637d422f86b7567bfae528dd"
+        $.ajax({
+            type: "GET",
+            data:"menuId="+menuId+"&limit=10&page=1",
+            url: "/sys/service/sys-cmsshow-service.showSecondIndexGridPage",
+            success: function(msg){
+                var records = msg.result.result;
+                var contentList="";
+                if(records.length==0){
+                    contentList="<div class='hidden_blk'>对不起，没有公司新闻可供查询！</div>";
+                    $("#hot_news_div").empty().append(contentList);
+                }else{
+                    contentList+="<h2 class='titles'>"
+                    var firstTitle=records[0].title
+                    if(firstTitle.length>15){
+                        firstTitle=firstTitle.substring(0,15)+ "..."
+                    }
+                    contentList+="<a onclick=showThreeIndex('"+records[0].id+"','"+records[0].title+"','"+(records[0].templateid||"")+"')>"+firstTitle+"</a>"
+                    contentList+="<span class='tips'>" + records[0].title
+                    contentList+="<a onclick=showThreeIndex('"+records[0].id+"','"+records[0].title+"','"+(records[0].templateid||"")+"')>" + "详细</a>"
+                    contentList+="</span>"
+                    contentList+="</h2>"
+                    if(records.length>1){
+                        contentList+="<ul class='list_style'>"
+                        for (var i = 1; i < records.length; i++){
+                            var title=records[i].title;
+                            if(title.length>15){
+                                title=title.substring(0,15)+ "...";
+                            }
+                            contentList+="<li>"
+                            contentList+="<span class='list_date'>"+records[i].publictime.substring(0,10)+"</span>"
+                            contentList+="<a onclick=showThreeIndex('"+records[i].id+"','"+records[i].title+"','"+(records[i].templateid||"")+"')>"+title+"</a>"
+                            contentList+="</li>";
+                        }
+                        contentList+="</ul>"
+                    }
+                    $("#hot_news_div").empty().append(contentList);
+                }
+            }
+        });
+    };
+    //获取发电量，煤炭产量，煤炭销量
+    function getDataList(){
+        $.ajax({
+            type: "GET",
+            data:{
+            },
+            type:'post',
+            cache:false,
+            dataType:'json',
+            url: "/sys/service/app-menhu-service.getFdlData",
+            success: function(r){
+                if (!r.success) return;
+                var records=r.result;
+                var flddate=records.flddate;
+                $("#scsjmore").attr("flddate",flddate);
+                flddate=flddate.replace('-','年');
+                flddate=flddate.replace('-','月');
+                flddate=flddate+'日';
+                $("#scsjdate").text("截止到"+flddate+"生产数据");
+                	
+                var dataStr="";
+                var strName="";
+                var strUnit="";
+                var divId="";
+                var fdl=records.fdl;
+            
+                if(fdl&&fdl.length>0){
+                    var fldhtml='';
+                    for (var i = 0; i < fdl.length; i++){
+                          fldhtml+='<tr><th scope="row" class="th_color">'+fdl[i].fldunit+'</th><td>'+fdl[i].fldbyday+'</td><td>'+fdl[i].flddaypen+'</td><td>'+fdl[i].fldbymonth+'</td><td>'+fdl[i].fldmonthpen+'</td><td>'+fdl[i].fldbyyear+'</td><td>'+fdl[i].fldyearpen+'</td><td>'+fdl[i].fldfinish+'</td></tr>'
+                    }
+                    $("#fdlthead").append(fldhtml);
+                }else{
+                    $("#fdlthead").append('<tr><td colspan="9">没有当日数据</td></tr>');
+                }
+                fdl=records.mtcl;
+                if(fdl&&fdl.length>0){
+                     var fldhtml='';
+                    for (var i = 0; i < fdl.length; i++){
+                          fldhtml+='<tr><th scope="row" class="th_color">'+fdl[i].fldunit+'</th><td>'+fdl[i].fldbyday+'</td><td>'+fdl[i].flddaypen+'</td><td>'+fdl[i].fldbymonth+'</td><td>'+fdl[i].fldmonthpen+'</td><td>'+fdl[i].fldbyyear+'</td><td>'+fdl[i].fldyearpen+'</td><td>'+fdl[i].fldfinish+'</td></tr>'
+                    } 
+                    $("#mtcltfoot").append(fldhtml);
+                }else{
+                    $("#mtcltfoot").append('<tr><td colspan="9">没有当日数据</td></tr>');
+                }
+                
+                fdl=records.mtxl;
+                if(fdl&&fdl.length>0){
+                    var fldhtml='';
+                    for (var i = 0; i < fdl.length; i++){
+                          fldhtml+='<tr><th scope="row" class="th_color">'+fdl[i].fldunit+'</th><td>'+fdl[i].fldbyday+'</td><td>'+fdl[i].flddaypen+'</td><td>'+fdl[i].fldbymonth+'</td><td>'+fdl[i].fldmonthpen+'</td><td>'+fdl[i].fldbyyear+'</td><td>'+fdl[i].fldyearpen+'</td><td>'+fdl[i].fldfinish+'</td></tr>'
+                    } 
+                    $("#mtxltbody").append(fldhtml);
+                }else{
+                    $("#mtxltbody").append('<tr><td colspan="9">没有当日数据</td></tr>');
+                }
+                
+            }
+        });      
+    };
+    //获取公告通知数据
+    function getGongGaoList(){
+        var menuId="b8036cdc9af748d4be94fa39a6e7bb8f";
+        $.ajax({
+            type: "post",  
+            cache:false,
+            data:"menuId="+menuId+"&limit=10&page=1",
+            url: "/sys/service/sys-cmsshow-service.showSecondIndexGridPage",
+            success: function(r){
+                var ggStr="<h2 class='title'>";
+                if (!r.success){
+                }else{
+                    ggStr+="<span class='more'>"  
+                    ggStr+='<a href="javascript:renderPartialRefreshHTML(\'/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=b8036cdc9af748d4be94fa39a6e7bb8f&navText=信息公开&type=same\')";>更多</a>';
+                    ggStr+="</span>"
+                    ggStr+="<i class='info'>信息公开</i>"
+                    ggStr+="</h2>"
+                    ggStr+="<div class='pad_up' id='quotation'>"
+                    var ggList=r.result.result;
+                    var tm="";
+                    var date="";
+                    if(ggList && ggList.length>0){
+                        ggStr+="<ul class=\"list_style_announcement announcement\">"
+                        for(var i=0;i<ggList.length;i++){
+                            ggStr+="<li>"
+                            tm=ggList[i].title
+                            if(tm.length>16){
+                                tm=tm.substring(0,16)+ "..."
+                            }
+                            ggStr+='<a href="javascript:renderPartialRefreshHTML(\'/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.three.html&contentId='+ggList[i].id+'&showway=2&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=信息公开\');" title="'+ggList[i].title+'" field="title" renderurl="level3Url" renderway="PartialRefresh" size="12">'+tm+'</a>';
+                            ggStr+="</li>"
+                        }
+                        ggStr+="</ul>"
+                    }
+                    ggStr+="</div>"
+                    $("#gonggao_list_div").empty().append(ggStr);
+                    if(ggList && ggList.length>1){
+                        var scrtime;
+                        $("#quotation").hover(function(){
+                            clearInterval(scrtime);
+                        },function(){
+                            scrtime = setInterval(function(){
+                                var $ul = $("#quotation ul");
+                                var liHeight = $ul.find("li:last").height();
+                                $ul.animate({marginTop : liHeight + 35 + "px"},1000,function(){
+                                
+                                $ul.find("li:last").prependTo($ul)
+                                $ul.find("li:first").hide();
+                                $ul.css({marginTop:0});
+                                $ul.find("li:first").fadeIn(1000);
+                                });
+                            },4000);
+                        }).trigger("mouseleave");
+                    }
+                }
+
+            }
+        })
+    };
+    //获取员工自助平台、法务在线、生成实时监督
+    function getLeftLink(){
+        var menuId="0c369517fe8049fb916a6eedef1faca4";
+        $.ajax({
+            type: "GET",  
+            data:"menuId="+menuId+"&limit=10&page=1&orderbysql=order by sn ",
+            url: "/sys/service/sys-cmsshow-service.showSecondIndexGridPage",
+            success: function(r){
+                var linkStr=""
+                if(r.success){
+                    var linkList=r.result.result;
+                    if(linkList.length==0){
+                        $("#footer_link_div").empty().append(linkStr);
+                    }else{
+                        var linkListStr = ""
+                        linkListStr += ""
+                        var backgroundImg="/sys/res/cms/ml/images/hulunbeier_28.png";
+                        var url;
+                        for(var i=0;i<linkList.length;i++){
+                            if(linkList[i].title.indexOf("员工自动服务平台")!=-1){
+                                backgroundImg="/sys/res/cms/ml/images/hulunbeier_30.png";
+                            }else if(linkList[i].title.indexOf("在线法务系统")!=-1){
+                                backgroundImg="/sys/res/cms/ml/images/hulunbeier_31.png";
+                            }
+                            else if(linkList[i].title.indexOf("生产实时监管系统")!=-1){
+                                backgroundImg="/sys/res/cms/ml/images/hulunbeier_32.png";
+                            }
+                            linkListStr+="<div class='item'><h3>"
+                            linkListStr+="<span style='background-image:url(" + backgroundImg + ");'></span>"
+                            if(linkList[i].hyperlink){
+                                url=linkList[i].hyperlink;
+                            }else{
+                                var vid = 'sys-cms-index9.second.html';
+                                url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=" + vid + "&menuId=" + linkList[i].menuid + "&showway=" + linkList[i].showway + "&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=" + linkList[i].title+ "&contentId=" + linkList[i].id;
+                            }
+                            linkListStr+="<a target='_blank' name='" + linkList[i].title+ "' class='selected' href='" + url + "'>" + linkList[i].title +"</a>"
+                            linkListStr+="</h3></div>"
+                        }
+                        $(".all-sort-list").append(linkListStr);
+                        //$("#left_link_div1").empty().append(linkListStr);
+                    }
+                }
+                allSortListAddHover();
+            }
+        })
+    };
+    //获取业务部门
+    function getYwLink(){
+        var menuId="70fa29e711a24ac5ab8aa29cf3e65e61";
+        $.ajax({
+            type: "GET",  
+            cache:false,
+            data:"name=" + encodeURI("业务部门"), //"id=" + menuId ,  //"name=" + escape("业务部门"),
+            url: "/sys/service/sys-cmsshow-service.showIndexColumnMenu?",
+            success: function(r){
+                var linkStr=""
+                if(r.success){
+                    var linkList=r.result[0];
+                    if(linkList.length==0){
+                        $(".all-sort-list").empty().append(linkStr);
+                    }else{
+                        var linkListStr = ""
+                        // for(var i=0;i<linkList.length;i++){
+                        //、onclick=showThreeIndex('"+linkList[i].id+"','"+linkList[i].title+"','"+(linkList[i].templateid||"")+"')
+                        linkListStr += "<div class='item'><h3><span style='background-image:url(/sys/res/cms/ml/images/hulunbeier_29.png);'></span><a href='#'>"+linkList.name+"</a></h3>"
+                        linkListStr += "<div class='item-list clearfix'><div class='close'>x</div><div class='subitem'>"
+                        for(var i=0;i<linkList.childsize;i++){
+                            linkListStr += "<dl class='fore1'><dt><a href='#'>"+linkList.children[i].name+"</a></dt>"
+                            if (linkList.children[i].children) {
+                                for(var j=0; j<linkList.children[i].children.length;j++){
+                                    linkListStr += "<dd><em><a href='#'>" + linkList.children[i].children[j].name +"</a></em></dd>"
+                                }
+                            }
+                            linkListStr += "</dl>"
+                            //linkList.children[6].children[0].name
+                            //.item-list .subitem dt  width
+                        }
+                        linkListStr += "</div>"
+                        $(".all-sort-list").append(linkListStr);
+                    }
+                    allSortListAddHover();
+                }
+            }
+
+        })
+    };
+    //获取专题活动
+    function getZTLink(){
+        var menuId="70fa29e711a24ac5ab8aa29cf3e65e61";
+        $.ajax({
+            type: "GET",  
+            cache:false,
+            data:"name=" + encodeURI("专题活动"),
+            url: "/sys/service/sys-cmsshow-service.showIndexColumnMenu?",
+            success: function(r){
+                var linkStr=""
+                if(r.success){
+                    var linkList=r.result[0].children;
+                    if(linkList.length==0){
+                        $(".all-sort-list").empty().append(linkStr);
+                    }else{
+                        var originalImagesCount=linkList.length;
+                        var circleCount = (originalImagesCount%3)==0 ? parseInt(originalImagesCount/3): parseInt(originalImagesCount/3)+1;
+                        var circleCount = originalImagesCount;
+                        var linkListStr = "<div style='width:1002px; margin:0 auto;' class='zt_bg_side '>  "
+                        linkListStr+="<ul id='smallSlideUl' class='info-btn clearfix' style=''>"
+                        for(var j=0;j<circleCount;j++){
+                            var id="mypic" + (j);
+                            if(j==0){
+                                linkListStr+="<li class='info-cur' id='" + id + "' sid='" + j + "'><span>" + (j+1) + "</span></li>"
+                            }else{
+                                linkListStr+="<li id='" + id + "' sid='" + j + "'><span>" + (j+1) + "</span></li>"
+                            }
+                        }
+                        linkListStr+="</ul>"
+                       // linkListStr+="<h2  style='width:100px; float:left; height:30px; line-height:30px; margin-left:20px;_margin-left:10px;'>专题活动</h2> "
+                        linkListStr+="</div>"
+                        linkListStr+="<div style='clear:both; height:0px; line-height:0px;'></div>"
+                        linkListStr+="<div class='main tab mt15'>"
+                        linkListStr+="<div class='slide'>"
+                        linkListStr+="<ul relist='15' id='bigSlideUl' class='slide-ul clearfix'>"
+                        for(var i=0;i<linkList.length;i++){
+                            var url = "/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.second.html&menuId=" + linkList[i].id + "&showway=" + linkList[i].showway + "&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText="+ linkList[i].name +""
+                            linkListStr+="<li>"
+                            linkListStr+="<a href=javascript:renderPartialRefreshHTML('" + url + "')>"
+                            linkListStr+="<img src='/sys/service/sys-cmssetting-service.outputContentImage?type=menu&id="+linkList[i].id+"'/>"
+                            linkListStr+="</a></li>"
+                        }
+                        linkListStr+="</ul>"
+                        linkListStr+="</div>"
+                        linkListStr+="</div>"
+                        $("#wrapperClearfix").empty().append(linkListStr);
+                        //动态变动按钮的样式
+                        $(".picimglink").css("text-decoration", "none");
+                        $(".picimglink").bind({
+                            mouseenter: function() {
+                                $(this).children("span").animate({
+                                    bottom: "0px"
+                                },
+                                500)
+                            },
+                            mouseleave: function() {
+                                $(this).children("span").clearQueue().animate({
+                                    bottom: "-30px"
+                                },
+                                500)
+                            }
+                        });
+                        var biZhiDelayLoadImg = $("#bigSlideUl img");
+                        var biZhiDelayLoadImgLength = biZhiDelayLoadImg.length;
+                        for (var i = 3; i < biZhiDelayLoadImgLength; i++) {
+                            var curDelayImg = biZhiDelayLoadImg.eq(i);
+                            if (curDelayImg.attr("srch")) {
+                                curDelayImg.attr("src", curDelayImg.attr("srch"));
+                                curDelayImg.removeAttr("srch")
+                            }
+                        }
+                        var _focus_num = $("#smallSlideUl > li").length;
+                        var _focus_direction = true;
+                        var _focus_pos = 0;
+                        var _focus_max_length = _focus_num * 1100;
+                        var _focus_li_length = 1100;
+                        var _focus_dsq = null;
+                        var _focus_lock = true;
+                        autoExecAnimate=function() {
+                            $("#mypic" + _focus_pos).addClass("info-cur").siblings("li.info-cur").removeClass("info-cur");
+                            var moveLen = _focus_pos * _focus_li_length;
+                            if($("#bigSlideUl")[0]&&$("#bigSlideUl")[0].getElementsByTagName("li").length>1)
+                            $("#bigSlideUl").animate({
+                                left: "-" + moveLen + "px"
+                            },
+                            600);
+                            
+                            if (_focus_pos == (_focus_num - 1)) {
+                                _focus_direction = false
+                            }
+                            if (_focus_pos == 0) {
+                                _focus_direction = true
+                            }
+                            if (_focus_direction) {
+                                _focus_pos++
+                            } else {
+                                _focus_pos--
+                            }
+                        }
+                        _focus_dsq = setInterval("autoExecAnimate()", 3000);
+                        $("#smallSlideUl > li").hover(function() {
+                            _focus_pos = parseInt($(this).attr("sid"));
+                            if (_focus_lock) {
+                                clearInterval(_focus_dsq);
+                                _focus_lock = false
+                            }
+                            $("#mypic" + _focus_pos).addClass("info-cur").siblings("li.info-cur").removeClass("info-cur");
+                            var moveLen = _focus_pos * _focus_li_length;
+                            $("#bigSlideUl").stop(true, true).animate({
+                                left: "-" + moveLen + "px"
+                            },
+                            600)
+                        },
+                        function() {
+                            if (_focus_lock == false) {
+                                _focus_dsq = setInterval("autoExecAnimate()", 3000);
+                                _focus_lock = true
+                            }
+                        });
+                        $("#bigSlideUl").hover(function() {
+                            if (_focus_lock) {
+                                clearInterval(_focus_dsq);
+                                _focus_lock = false
+                            }
+                        },
+                        function() {
+                            if (_focus_lock == false) {
+                                _focus_dsq = setInterval("autoExecAnimate()", 3000);
+                                _focus_lock = true
+                            }
+                        });
+                        $(".pic-list2 li").hover(function() {
+                            $(this).addClass("hover").siblings().removeClass("hover")
+                        },
+                        function() {
+                            $(this).removeClass("hover")
+                        });
+                    }
+                }
+            }
+        })
+    };
+    //获取待办条数和邮件数
+    function getDataNum(){
+        $.ajax({
+            type: "GET",  
+            cache:false,
+            dataType:'json',
+            url: "/sys/service/app-menhu-service.getDataNum?",
+            success: function(r){
+                var dataNumStr="<div class='install_left'>";
+                if (!r.success){
+                }else{
+                    dataNumStr+="<ul>"
+                    dataNumStr+="<li class='icon1'><a href='" + r.result.dblink + "'>待办：" + r.result.result.appNum + "</a></li>"
+                    var mailPath=r.result.result.mailPath
+                    if(mailPath){
+                        mailPath=mailPath.replace("\\","/");
+                    }
+                    dataNumStr+="<li class='icon2'><a href='" + r.result.yjlink + "/" + mailPath + "'>邮件：" + r.result.result.mailNum + "</a></li>"
+                    dataNumStr+="</ul>"
+                    dataNumStr+="</div>"
+                    dataNumStr+="<div class='install_right'><a href='" + r.result.officelink + "'>进入</a></div>"
+                    $("#datanum").empty().append(dataNumStr);
+                }
+            }
+        })
+    }
+    //获取常用下载文章
+    function getDownArticle(){
+        var menuId="4f43f42f57b14a75880e6e97916f8694";
+        $.ajax({
+            type: "post",  
+            cache:false,
+            data:"menuId="+menuId+"&limit=10&page=1",
+            url: "/sys/service/sys-cmsshow-service.showSecondIndexGridPage",
+            success: function(r){
+                
+                if (!r.success){
+                }else{
+                    var ggList=r.result.result;
+                    var tm="";
+                    var date="";
+                    var ggStr="";
+                    if(ggList && ggList.length>0){
+                        for(var i=0;i<1;i++){
+                            tm=ggList[i].title
+                            if(tm.length>16){
+                                tm=tm.substring(0,16)+ "..."
+                            }
+                            ggStr+='<a href="javascript:renderPartialRefreshHTML(\'/sys/service/sys-cmsshow-service.cmsViewRender?$$vid=sys-cms-index9.three.html&contentId='+ggList[i].id+'&showway=2&indexPages=sys-cms-index9.html&secondIndex=sys-cms-index9.second.html&threeIndex=sys-cms-index9.three.html&navText=信息公开\');" title="'+ggList[i].title+'" field="title" renderurl="level3Url" renderway="PartialRefresh" size="12"><img src="'+'/sys/service/sys-cmssetting-service.outputContentImage?id='+ggList[i].id+'"></a>';
+                        }
+                    }
+                    $("#cyljdownload").empty().append(ggStr);
+                }
+
+            }
+        })
+    }
+    //获取友情链接
+    function getfriendlinks(){
+         var menuId="6d4155c967af497ebb72b4d828b89cde";
+        $.ajax({
+            type: "post",  
+            cache:false,
+            data:"menuId="+menuId+"&limit=100&page=1",
+            url: "/sys/service/sys-cmsshow-service.showSecondIndexGridPage",
+            success: function(r){
+                if (!r.success){
+                }else{
+                    var ggList=r.result.result;
+                    var tm="";
+                    var date="";
+                    var ggStr="";
+                    if(ggList && ggList.length>0){
+                        for(var i=0;i<1;i++){
+                            tm=ggList[i].title;
+                            ggStr+='<OPTION value="'+ggList[i].hyperlink+'">'+tm+'</OPTION>';
+                        }
+                    }
+                    $("#friendlinks").append(ggStr);
+                }
+
+            }
+        })
+    }
+</script> 
+<!--<script type="text/javascript" src="/sys/res/cms/ml/js/slideshow.js"></script>-->
+<script type="text/javascript">
+$(function(){
+    var scrtime;
+    $("#quotation").hover(function(){
+        clearInterval(scrtime);
+    
+    },function(){
+    
+    scrtime = setInterval(function(){
+        var $ul = $("#quotation ul");
+        var liHeight = $ul.find("li:last").height();
+        $ul.animate({marginTop : liHeight + 35 + "px"},1000,function(){
+        
+        $ul.find("li:last").prependTo($ul)
+        $ul.find("li:first").hide();
+        $ul.css({marginTop:0});
+        $ul.find("li:first").fadeIn(1000);
+        });
+    },4000);
+    
+    }).trigger("mouseleave");
+});
+</script>  
+
+<script type="text/javascript">
+    allSortListAddHover();
+    function allSortListAddHover(){
+             $('.all-sort-list > .item').hover(function(){
+            var eq = $('.all-sort-list > .item').index(this),               //获取当前滑过是第几个元素
+                h = $('.all-sort-list').offset().top,                       //获取当前下拉菜单距离窗口多少像素
+                s = $(window).scrollTop(),                                  //获取游览器滚动了多少高度
+                i = $(this).offset().top,                                   //当前元素滑过距离窗口多少像素
+                item = $(this).children('.item-list').height(),             //下拉菜单子类内容容器的高度
+                sort = $('.all-sort-list').height();                        //父类分类列表容器的高度
+            
+            if ( item < sort ){                                             //如果子类的高度小于父类的高度
+                if ( eq == 0 ){
+                    $(this).children('.item-list').css('top', (i-h));
+                } else {
+                    $(this).children('.item-list').css('top', (i-h)+1);
+                }
+            } else {
+                if ( s > h ) {                                              //判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+                    if ( i-s > 0 ){                                         //则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+                        $(this).children('.item-list').css('top', (s-h)+2 );
+                    } else {
+                        $(this).children('.item-list').css('top', (s-h)-(-(i-s))+2 );
+                    }
+                } else {
+                    $(this).children('.item-list').css('top', 3 );
+                }
+            }   
+
+            $(this).addClass('hover');
+            $(this).children('.item-list').css('display','block');
+        },function(){
+            $(this).removeClass('hover');
+            $(this).children('.item-list').css('display','none');
+        });
+        $('.item > .item-list > .close').click(function(){
+            $(this).parent().parent().removeClass('hover');
+            $(this).parent().hide();
+        });
+    }
+</script>
+<!--<script type="text/javascript" src="/sys/res/cms/ml/js/zsucai.js"></script>   --></div>
+<!--局部刷新内容结束--> 
+<!--底部说明--> 
+<div class="main_width">
+    <div class="footer" id="footer_link_div">
+    </div>
+</div>
+<!--首页底部结束-->
+    
+<!--首页正式内容结束-->
+
+</body>
+</html>

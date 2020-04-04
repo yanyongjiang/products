@@ -1,0 +1,38 @@
+<div class="col-md-11 column container" style="">
+    <div class="row">
+        <div class="col-md-10 column">
+            <div class="btn-group btn-group-sm" role="group" style="width:100%;">
+                <button type="button" class="btn btn-primary" onclick="FlowDesign.saveData();">保存</button>
+                <button type="button" class="btn btn-success" onclick="FlowDesign.closeFd();">关闭</button>
+                <button type="button" class="btn btn-info" onclick="FlowDesign.showData();">查看数据</button>
+                <button type="button" class="btn btn-info" onclick="FlowDesign.lookData();">预览</button>
+            </div>
+        </div>
+        <div class="col-md-2 column">
+            <div class="btn-group btn-group-sm" role="group" style="width:100%;">
+            <button type="button" class="btn btn-primary" style="width:100%;" title="流程名称,流程节点，流向属性配置">属性配置</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 column">
+            <div class="flow_left_tasknode">
+                <div class="list-group flow_start_node" id="startdiv">
+                    <a href="#" class="btn btn-primary">开始</a>
+                </div>
+                <div class="list-group flow_task_node" id="taskdiv">
+                    <a href="#" class="btn btn-primary">用户任务</a>
+                </div>
+                <div class="list-group flow_end_node" id="enddiv">
+                    <a href="#" class="btn btn-primary">结束</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 column">
+            <div class="flow_work_inner" id="flow_work_inner"></div>
+        </div>
+        <div class="col-md-2 column">
+            <div name="property" class="flow_right_property"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+ALTER TABLE dev2.mhcolumn ADD fldpic varchar(100) NULL;
+
+  <ul class="clearfix" style="display: block;">
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_bgs/index.shtml">区委办公室</a></li>
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_zzb/index.shtml">区委组织部</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_xcb/index.shtml">区委宣传部</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_tzb/index.shtml">区委统一战线工作部</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_zfw/index.shtml">区委政法委员会</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_jgdw/index.shtml">区直属机关党工委</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_lgj/index.shtml">区委老干部局</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_bwb/index.shtml">区机构编制委员会办公室</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_xfj/index.shtml">区信访局</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_sydw/index.shtml">区事业单位登记管理局</a></li>
+
+                <li style="float: left;width: 25%;"><a target="_blank" href="/yxxxw/pc/gzjg/qw/qw_sgw/index.shtml">区社会工作委员会</a></li>
+            </ul>
+			
+			        /*一般的文字截断(适用于内联与块)：*/
+        /*@author zhenyuya <zhenyuya@163.com>*/
+        .text-oneLine{
+            display:block;            /*内联对象需加*/
+            word-break:keep-all;      /* 不换行 */
+            white-space:nowrap;       /* 不换行 */
+            overflow:hidden;          /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow:ellipsis;   /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+        }
+
+		
+		<a target="_blank" href="/orgwork.html?to=mh.html" style="float: right;font-size: 18px;">管理登录</a>

@@ -1,0 +1,26 @@
+.flow_work_inner {
+    overflow: hidden;
+    position: relative;
+    background-image: url(../img/bg.png);
+    border: 1px solid #ddd;
+}
+.flow_start_node{
+    width: 54px;
+    text-align: center;
+}
+.flow_end_node{
+    width: 54px;
+    text-align: center;
+}
+.flow_task_node{
+    text-align: center;
+}
+.flow_left_tasknode{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #CCC;
+    align-items: center;
+}
+.flow_right_property{
+    border: 1px solid #CCC;
+}

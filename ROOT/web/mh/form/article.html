@@ -1,0 +1,65 @@
+<div class="container" style="width: 100%;" id="articleformid">
+    <div class="row" style="">
+        <div class="col-sm-12" style="">
+            <div>
+                <input type="hidden" id="id">
+                <input type="hidden" id="pkid" value="">
+                <input type="hidden" id="initbmid" value="">
+                <input type="hidden" id="initbm" value="">
+                <input type="hidden" id="initdeptid" value="">
+                <input type="hidden" id="initdeptname" value="">
+                <input type="hidden" id="initunitid" value="">
+                <input type="hidden" id="initunitname" value="">
+                <input type="hidden" id="inituserid" value="">
+                <input type="hidden" id="initusername" value="">
+                <input type="hidden" id="fldlmid" value="">
+                <input type="hidden" id="fldngdate" value="">
+                <input type="hidden" id="state" value="1">
+                <input type="hidden" id="fldsn" value="">
+                <input type="hidden" id="fldisfb" value="">
+                <input type="hidden" id="fldfbsj" value="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group"><span class="input-group-addon">标题</span> <input class="form-control" type="text" id="fldtm">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="input-group"><span class="input-group-addon">链接</span> <input class="form-control" type="text" id="fldlink">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <form id="fldpicform" class="" role="form" style="" method="post" enctype="multipart/form-data">
+                            <div class="input-group"><span class="input-group-addon">图片</span>
+                                <input class="form-control" type="text" id="fldpic"  style="width: calc(100% - 108px);" readonly="readonly">
+                                <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle;float:left;">
+                                    <button class="btn btn-success fileinput-button" type="button">上传</button>
+                                    <input type="file" name="file" id="picData" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                                </div>
+                                <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle;float:left;">
+                                    <button class="btn btn-danger" type="button" id="clearPic">清除</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12" style="margin-bottom: 0px;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="height:41px;">
+                                <span style="float:left;">附件</span>
+                                <div id="attachUpload" style="position: relative;margin-left: 10px;float: left;">上传</div>
+                            </div>
+                            <div class="list-group" id="attachlist"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="">
+                    <div class="form-group col-sm-12" style="">
+                        <div id="mhEditorContainerText" class="input-group" style="float: left; width: 59px; height: 390px;"><span class="input-group-addon">内容<span style="color:red;">*</span></span> <span></span></div>
+                        <div id="mhEditorContainer" style="overflow: auto;float: left;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

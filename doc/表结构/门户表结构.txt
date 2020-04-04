@@ -1,0 +1,53 @@
+门户栏目表
+mhcolumn
+
+CREATE TABLE `mhcolumn` (
+  `id` varchar(64) NOT NULL,
+  `fldname` varchar(500) DEFAULT NULL,
+  `fldsn` int(11) DEFAULT NULL,
+  `fldparentid` varchar(64) DEFAULT NULL,
+  `fldparentname` varchar(500) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `state` varchar(2) DEFAULT '1',
+  `fldpic` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+文章表
+CREATE TABLE `mharticle` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500) DEFAULT NULL,
+  `fldcontent` text,
+  `fldlink` varchar(256) DEFAULT NULL,
+  `fldpic` varchar(256) DEFAULT NULL,
+  `inituserid` varchar(64) DEFAULT NULL,
+  `initusername` varchar(500) DEFAULT NULL,
+  `initbmid` varchar(64) DEFAULT NULL,
+  `initbm` varchar(64) DEFAULT NULL,
+  `initdeptid` varchar(64) DEFAULT NULL,
+  `initdeptname` varchar(64) DEFAULT NULL,
+  `initunitid` varchar(64) DEFAULT NULL,
+  `initunitname` varchar(64) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldisfb` varchar(2) DEFAULT NULL,
+  `fldfbsj` datetime DEFAULT NULL,
+  `state` varchar(2) DEFAULT '1',
+  `fldlmid` varchar(64) DEFAULT NULL,
+  `fldsn` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)  
+附件表
+CREATE TABLE `mhattach` (
+  `id` varchar(64) NOT NULL,
+  `pkid` varchar(64) DEFAULT NULL,
+  `fldpath` varchar(64) DEFAULT NULL,
+  `fldfilename` varchar(600) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldsize` varchar(100) DEFAULT NULL,
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldusername` varchar(64) DEFAULT NULL,
+  `fldext` varchar(100) DEFAULT NULL,
+  `fldtype` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) 
+

@@ -1,0 +1,53 @@
+栏目树表
+
+
+栏目内容表
+
+
+样式抄 广州市人民政府 
+
+广州市越秀区人民政府，
+
+
+addArticle
+
+<div class="form-group col-sm-12">
+                        <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                            <button class="btn btn-success fileinput-button" type="button">上传</button>
+                            <input type="file" id="jobData" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                        </div>
+                        <span id="filename" style="vertical-align: middle">未上传文件</span>
+                    </div>
+					
+					705-560
+					
+					 <li><a href="#"><img src="1.JPG"></a></li>
+                    <li><a href="#"><img src="2.JPG"></a></li>
+                    <li><a href="#"><img src="3.JPG"></a></li>
+                    <li><a href="#"><img src="4.JPG"></a></li>
+                    <li><a href="#"><img src="5.JPG"></a></li>
+                    <li><a href="#"><img src="6.JPG"></a></li>
+                    <li><a href="#"><img src="7.JPG"></a></li>
+					
+					<ul style="
+    padding-left: 0px;
+    /* left: -100px; */
+    position: relative;
+"><li><a href="#" style="
+    position: relative;
+"><img src="/service/mh-downArtAttach?id=2c25a01c92204496a6276ba84c2ea88c"><span style="
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    /* height: 500px; */
+    position: absolute;
+    /* left: 0; */
+    /* bottom: 0; */
+    width: 500px;
+    height: 42px;
+    background: url(../images/index_ban_bg.png);
+    font-size: 18px;
+    color: #fff;
+    padding: 16px 30px 28px;
+    overflow: hidden;
+">9哒哒哒哒哒哒多</span></a></li><li><a href="#"><img src="/service/mh-downArtAttach?id=389051015b3c48c7917d884a3bbb1b16"><span>8</span></a></li></ul>

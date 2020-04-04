@@ -1,0 +1,9 @@
+  <div class="form-group col-sm-12">
+                                <div id="workEditorContainerText" class="input-group" style="float: left;width: 59px;">
+                                    <span class="input-group-addon">内容<span style="color:red;">*</span></span>
+                                <span></span>
+                                </div>
+                                <div id="workEditorContainer" style="overflow: auto;float: left;"></div>
+                        
+						
+						form-group

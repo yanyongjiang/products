@@ -1,0 +1,62 @@
+package com.yyj.apps.bbs.postreplay.model;
+import java.sql.Timestamp;
+
+public class Bbspost {
+   private String id;
+   private String fldtm;
+   private String fldcontent;
+   private Timestamp fldngdate;
+   private String fldstatus;
+   private String fldtext;
+   private String flduserid;
+   //fldtm
+   public String getFldtm() {
+      return fldtm;
+   }
+   public void setFldtm(String fldtm) {
+      this.fldtm = fldtm;
+   }
+
+   public String getFldcontent() {
+      return fldcontent;
+   }
+
+   public void setFldcontent(String fldcontent) {
+      this.fldcontent = fldcontent;
+   }
+   public Timestamp getFldngdate() {
+      return fldngdate;
+   }
+   public void setFldngdate(Timestamp fldngdate) {
+      this.fldngdate = fldngdate;
+   }
+   public String getFldstatus() {
+      return fldstatus;
+   }
+
+   public void setFldstatus(String fldstatus) {
+      this.fldstatus = fldstatus;
+   }
+   public void setId(String id) {
+      this.id = id;
+   }
+   public String getId() {
+      return id;
+   }
+
+   public String getFldtext() {
+      return fldtext;
+   }
+
+   public void setFldtext(String fldtext) {
+      this.fldtext = fldtext;
+   }
+
+   public String getFlduserid() {
+      return flduserid;
+   }
+
+   public void setFlduserid(String flduserid) {
+      this.flduserid = flduserid;
+   }
+}

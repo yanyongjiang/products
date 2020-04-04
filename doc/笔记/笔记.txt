@@ -1,0 +1,7 @@
+clearIndex
+
+http://localhost:8080/service/commonservice-updateJsCssVer?v=1
+
+http://localhost:8080/service/commonservice-updateJsCssVer?v=2
+
+http://www.yunh9.com/service/commonservice-updateJsCssVer?v=3

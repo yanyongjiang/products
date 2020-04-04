@@ -1,0 +1,44 @@
+var nodes2 = FlowDesign.zTreeObj.getSelectedNodes();
+        var node;
+        if (nodes2 && nodes2.length > 0) {
+            node = nodes2[0];
+        }
+        FlowDesign.addCat(null, node);
+		
+		http://localhost:8080/ztree/css/zTreeStyle/zTreeStyle.css
+		//width: auto;
+		
+		
+		function saveFlowchart(){
+            var nodes = []
+            $(".node").each(function (idx, elem) {
+            var $elem = $(elem);
+            var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
+            console.log('endpoints of '+$elem.attr('id'));
+            console.log(endpoints);
+                nodes.push({
+                    blockId: $elem.attr('id'),
+                    nodetype: $elem.attr('data-nodetype'),
+                    positionX: parseInt($elem.css("left"), 10),
+                    positionY: parseInt($elem.css("top"), 10)
+                });
+            });
+            var connections = [];
+            $.each(jsPlumb.getConnections(), function (idx, connection) {
+                connections.push({
+                    connectionId: connection.id,
+                    pageSourceId: connection.sourceId,
+                    pageTargetId: connection.targetId
+                });
+            });
+
+            var flowChart = {};
+            flowChart.nodes = nodes;
+            flowChart.connections = connections;
+            flowChart.numberOfElements = numberOfElements;
+
+            var flowChartJson = JSON.stringify(flowChart);
+            //console.log(flowChartJson);
+
+            $('#jsonOutput').val(flowChartJson);
+        }

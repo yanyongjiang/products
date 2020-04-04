@@ -1,0 +1,25 @@
+导入数据表。
+
+CREATE TABLE `esdata` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500) DEFAULT NULL,
+  `fldcontent` text,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldstatus` varchar(2) DEFAULT '1',
+  `fldtext` text,
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `esattach` (
+  `id` varchar(64) NOT NULL,
+  `pkid` varchar(64) DEFAULT NULL,
+  `fldpath` varchar(64) DEFAULT NULL,
+  `fldfilename` varchar(600) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldsize` varchar(100) DEFAULT NULL,
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldusername` varchar(64) DEFAULT NULL,
+  `fldext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+

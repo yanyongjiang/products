@@ -1,0 +1,12 @@
+D:\work\product1\ROOT\web\work.html
+D:\work\product1\ROOT\web\email
+D:\work\product1\org\src\com\yyj\apps\email
+D:\work\product1\common\src\com\yyj\utils\db\DbUtils.java
+D:\work\product1\common\src\com\yyj\commonservice\CommonCmd.java
+
+
+D:\work\product1\ROOT\web\platform\js\platform.js
+
+bbs.html
+
+org/js/org.all.js

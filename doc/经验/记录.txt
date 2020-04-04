@@ -1,0 +1,1 @@
+es会自己坏掉吗 ，报node config 错误。

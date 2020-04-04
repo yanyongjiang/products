@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>生活说</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/jqgrid/css/ui.jqgrid-bootstrap4.css">
+    <script src="/jquery/js/jquery-3.3.1.min.js"></script>
+    <script src="/jquery/js/jquery.form.js"></script>
+    <script src="/bbs/js/bbs.all.js"></script>
+    <script src="/dialog/js/dialog.js"></script>
+    <script src="/platform/js/platform.js"></script>
+    <script src="/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <script src="/jqgrid/js/jquery.jqGrid.min.js"></script>
+</head>
+<body onload="Bbs.initManage();" style="">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div>
+                <div class="btn-group">
+                <button class="btn btn-default" type="button" id="hidepost"><em class="glyphicon glyphicon-remove" style="color: red;"></em>隐藏贴子</button>
+                <button class="btn btn-default" type="button" id="showpost"><em class="glyphicon glyphicon-ok-circle" style="color: red;"></em>显示贴子</button>
+                <button class="btn btn-default" type="button" id="editpost"><em class="glyphicon glyphicon-ok-circle" style="color: red;"></em>编辑</button>
+                </div>
+                <div class="navbar-form navbar-right" style="margin-bottom: 0px;margin-top: 0px;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入标题"  id="postsearchinput" style="width:340px;">
+                    </div>
+                    <button class="btn btn-default" id="postsearchbutton">搜索</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 column">
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
+        </div>
+    </div>
+</div>
+</body>

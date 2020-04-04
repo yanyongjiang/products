@@ -1,0 +1,11 @@
+全文检索 加一个加载中提示。 （已改）
+         查看表单标题不要输入。（已改）
+
+简易办公起草百度编辑内容过多，样式乱了。（已改）
+        暂存的文件打开无法编辑。（已改）
+        
+提供url修改html的js加版本参数 （已改）
+http://localhost:8080/service/commonservice-updateJsCssVer?v=2
+http://www.yunh9.com/service/commonservice-updateJsCssVer?v=6
+
+发送邮件加遮罩。

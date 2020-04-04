@@ -1,0 +1,90 @@
+<div class="container" style="width: 100%;" id="dataMailForm">
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="" role="form">
+                <input type="hidden" id="id">
+                <input type="hidden" id="pkid">
+                <input type="hidden" id="initbmid">
+                <input type="hidden" id="initbm">
+                <input type="hidden" id="initdeptid">
+                <input type="hidden" id="initdeptname">
+                <input type="hidden" id="initunitid">
+                <input type="hidden" id="initunitname">
+                <input type="hidden" id="inituserid">
+                <input type="hidden" id="initusername">
+                <input type="hidden" id="fldngtime">
+                <div class="row">
+                    <div class="col-sm-12 btn-group btn-group-sm">
+                    <a class="btn btn-default" id="sendDraft">发送</a>
+                    <a class="btn btn-default" id="saveDraft">存草稿</a>
+                    <a class="btn btn-default" id="closeDraft">关闭</a>
+                    <a class="btn btn-default" id="addCs">添加抄送</a>
+                    <a class="btn btn-default" id="addMs">添加密送</a>
+                    <a id="saveDraftTip" style="display: none;">[邮件已保存到草稿]</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">收件人<span style="color:red;">*</span></span>
+                            <div type="text" class="dropdown open" style="display: table-cell;border: 1px solid #ccc;" id="fldsjr"><input style="height: 32px;border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;" id="fldsjrautocomplete" type="text"/></div>
+                            <span class="input-group-btn"><button class="btn btn-default" type="button" id="fldsjrbutton">选择</button></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="fldcsrdiv" style="display: none;">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">抄送人<span style="color:red;">*</span></span>
+                            <div id="fldcjr" type="text"  class="dropdown open" style="display: table-cell;border: 1px solid #ccc;">
+                                <input style="height: 32px;border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;" id="fldcjrautocomplete" type="text"/>
+                            </div>
+                            <span class="input-group-btn"><button class="btn btn-default" type="button" id="fldcjrbutton">选择</button></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="fldmsrdiv" style="display: none;">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">密送人<span style="color:red;">*</span></span>
+                            <div id="fldmjr" type="text" class="dropdown open" style="display: table-cell;border: 1px solid #ccc;">
+                                <input style="height: 32px;border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;" id="fldmjrautocomplete" type="text"/>
+                            </div>
+                            <span class="input-group-btn"><button class="btn btn-default" type="button" id="fldmjrbutton">选择</button></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">主题<span style="color:red;">*</span></span>
+                            <input class="form-control" type="text" id="fldtm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12" style="margin-bottom: 0px;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="height:41px;">
+                                <div id="attachUpload" style="position: relative;margin-left: 10px;float: left;">添加附件</div>
+                            </div>
+                            <div class="list-group" id="attachlist">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <div id="mailText" class="input-group" style="float: left;">
+                            <span class="input-group-addon">内容<span style="color:red;">*</span></span>
+                            <span></span>
+                            <textarea id="fldcontent" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>

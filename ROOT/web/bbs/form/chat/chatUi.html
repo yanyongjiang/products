@@ -1,0 +1,41 @@
+<div class="container-fluit" id="chatForm">
+    <div class="row">
+        <div class="col-md-2 column" style="padding-right: 0px;">
+            <div class="input-group">
+                <input id="qcon" type="text" class="form-control" placeholder="用户名">
+                  <span class="input-group-btn">
+                        <button name="searchbtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-zoom-in"></span></button>
+                  </span>
+            </div>
+            <div class="list-group" id="friend">
+
+            </div>
+        </div>
+        <div class="col-md-10 column" style="padding-left: 0px;">
+            <div class="container-fluit">
+                <div class="row">
+                    <div class="col-md-12 column">
+                        <div id="ToChatUser" class="alert alert-info" role="alert"
+                             style="margin-bottom: 0px;padding-bottom: 5px;padding-top: 5px;">
+                        </div>
+                    </div>
+                    <div class="col-md-12 column" style="overflow:auto;">
+                        <ul id="chatContent" class="list-group" style="height:100%;margin-bottom: 0px;border: 1px solid #ddd;">
+
+                        </ul>
+                    </div>
+                    <div class="col-md-12 column">
+                        <div style="border-top: 1px solid #ccc;height: 36px;">
+                            <button name="chathist" type="button" class="btn btn-info" style="float:right;">聊天记录</button>
+                        </div>
+                        <textarea class="form-control" id="message" placeholder="请输入"
+                                  style="height:150px;"></textarea>
+                    </div>
+                    <div class="col-md-12 column">
+                        <button class="btn btn-warning" onclick="" style="float:right;" id="sendButton">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

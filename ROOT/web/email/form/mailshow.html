@@ -1,0 +1,98 @@
+<div class="container" style="width: 100%;" id="dataMailFormshow">
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="" role="form">
+                <input type="hidden" id="id">
+                <input type="hidden" id="pkid">
+                <input type="hidden" id="initbmid">
+                <input type="hidden" id="initbm">
+                <input type="hidden" id="initdeptid">
+                <input type="hidden" id="initdeptname">
+                <input type="hidden" id="initunitid">
+                <input type="hidden" id="initunitname">
+                <input type="hidden" id="inituserid">
+                <input type="hidden" id="emailid">
+                <div class="row">
+                    <div class="col-sm-12 btn-group btn-group-sm">
+                        <a class="btn btn-default" id="toback"><span class="glyphicon glyphicon-backward"></span>返回</a>
+                        <a class="btn btn-default" id="toreplay">回复</a>
+                        <a class="btn btn-default" id="toreplayAll">回复全部</a>
+                        <a class="btn btn-default" id="changsend">转发</a>
+                        <a class="btn btn-default" id="todel">删除</a>
+                        <a class="btn btn-default" id="toCdel">彻底删除</a>
+                        <div style="display: inline-block;" id="movelist"></div>
+                        <a class="btn btn-default" id="toNext" style="float:right;"><span class="glyphicon glyphicon-arrow-down"></span>下一封</a>
+                        <a class="btn btn-default" id="toLast" style="float:right;"><span class="glyphicon glyphicon-arrow-up"></span>上一封</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">发件人</span>
+                            <input class="form-control" type="text" id="initusername">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <div class="input-group"><span class="input-group-addon">时间</span>
+                            <input class="form-control" type="text" id="fldngtime"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">收件人</span>
+                            <div type="text" id="fldsjr" style="display: table-cell;border: 1px solid #ccc;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="fldcsrdiv" style="display: none;">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">抄送人</span>
+                            <div type="text" id="fldcjr" style="display: table-cell;border: 1px solid #ccc;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="fldmsrdiv" style="display: none;">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">密送人</span>
+                            <div type="text" id="fldmjr" style="display: table-cell;border: 1px solid #ccc;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">主题</span>
+                            <input class="form-control" type="text" id="fldtm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="attachlistdiv">
+                    <div class="form-group col-sm-12" style="margin-bottom: 0px;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="height:41px;">
+                                <div id="attachUpload" style="position: relative;margin-left: 10px;float: left;">附件
+                                </div>
+                            </div>
+                            <div class="list-group" id="attachlist">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <div id="mailText" class="input-group" style="float: left;">
+                            <span class="input-group-addon">内容</span>
+                            <span></span>
+                            <textarea id="fldcontent" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>

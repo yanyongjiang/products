@@ -1,0 +1,64 @@
+id="yxdt"
+
+ <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">越秀快讯</a></li>
+            <li role="presentation"><a href="#"></a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+        </ul>
+        <ul class="list-group" >
+            <li class="list-group-item"><span class="badge">14</span>Cras justo odio</li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+        </ul>
+        <ul class="list-group" >
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+            <li class="list-group-item">
+                <span class="badge">14</span>
+                Cras justo odio
+            </li>
+        </ul>

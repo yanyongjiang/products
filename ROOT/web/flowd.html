@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>流程设计</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/jsplumb/css/flow.css">
+    <script src="/jquery/js/jquery-3.3.1.min.js"></script>
+    <script src="/jquery/js/jquery.form.js"></script>
+    <script src="/jsplumb/js/jsplumb.js"></script>
+    <script src="/jsplumb/js/flowdesign.js"></script>
+    <script src="/dialog/js/dialog.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootbox/js/bootbox.min.js"></script>
+    <script src="/platform/js/platform.js"></script>
+    <script src="/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+        $(document).ready(function () {
+            FlowDesign.init();
+        });
+    </SCRIPT>
+</head>
+<body style="">
+<div class="container" style="">
+    <div class="row">
+        <div class="col-md-11 column">
+            <div class="btn-group btn-group-sm" role="group" style="width:100%;">
+                <button type="button" class="btn btn-primary" onclick="Es.addData();">保存</button>
+                <button type="button" class="btn btn-success" onclick="Es.editData();">关闭</button>
+                <button type="button" class="btn btn-info" onclick="Es.delData();">查看数据</button>
+                <button type="button" class="btn btn-info" onclick="Es.delData();">预览</button>
+            </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 column">
+            <div class="flow_left_tasknode">
+            <div class="list-group flow_start_node" id="startdiv">
+                <a href="#" class="list-group-item list-group-item-success">开始</a>
+            </div>
+            <div class="list-group flow_task_node" id="taskdiv">
+                <a href="#" class="list-group-item list-group-item-success">用户任务</a>
+            </div>
+            <div class="list-group flow_end_node" id="enddiv">
+                <a href="#" class="list-group-item list-group-item-success">结束</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-8 column">
+            <div class="flow_work_inner" id="flow_work_inner"></div>
+        </div>
+        <div class="col-md-2 column">
+        </div>
+    </div>
+</div>
+</body>
+</html>

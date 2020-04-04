@@ -1,0 +1,70 @@
+发件箱/收件箱/已删除
+CREATE TABLE `orgemail` (
+  `id` varchar(64) NOT NULL,
+  `fldcontentid` varchar(64),
+  `state` varchar(2) DEFAULT '1',
+  `fldsjr` varchar(64) DEFAULT NULL,
+  `fldsjrid` varchar(64) DEFAULT NULL,
+  `fldtype` varchar(64) DEFAULT NULL,
+  `fldboxid` varchar(64) DEFAULT NULL,
+  `fldreadtime` datetime,
+   PRIMARY KEY (`id`)
+); 
+
+邮箱内容表
+CREATE TABLE `orgemailcon` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500),
+  `fldcontent` text,
+  `inituserid` varchar(64),
+  `initusername` varchar(64),
+  `initbmid` varchar(64),
+  `initbm` varchar(64),
+  `initdeptid` varchar(64),
+  `initdeptname` varchar(64),
+  `initunitid` varchar(64),
+  `initunitname` varchar(64),
+  `fldngtime` datetime,
+  `fldsjrs` text,
+  `fldsjrids` text,
+  `fldcsrs` text,
+  `fldcsrids` text,
+  `fldmsrs` text,
+  `fldmsrids` text,
+   PRIMARY KEY (`id`)
+); 
+
+附件表
+CREATE TABLE `orgemailattach` (
+  `id` varchar(64) NOT NULL,
+  `pkid` varchar(64) DEFAULT NULL,
+  `fldpath` varchar(64) DEFAULT NULL,
+  `fldfilename` varchar(600) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldsize` varchar(100) DEFAULT NULL,
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldusername` varchar(64) DEFAULT NULL,
+  `fldext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+文件夹表
+CREATE TABLE `orgemailfolder` (
+  `id` varchar(64) NOT NULL,
+  `fldname` varchar(500),
+  `fldsn` int(11),
+  `inituserid` varchar(64),
+  `initusername` varchar(64),
+  `initbmid` varchar(64),
+  `initbm` varchar(64),
+  `initdeptid` varchar(64),
+  `initdeptname` varchar(64),
+  `initunitid` varchar(64),
+  `initunitname` varchar(64),
+  `fldngtime` datetime,
+  `fldparentid` varchar(64),
+  `fldparentname` varchar(500),
+  `state` varchar(2) DEFAULT '1',
+   PRIMARY KEY (`id`)
+);  

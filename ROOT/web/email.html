@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>公司邮箱</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ztree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/jqgrid/css/ui.jqgrid-bootstrap4.css">
+    <link rel="stylesheet" href="/jedate/css/jedate.css">
+    <script src="/jquery/js/jquery-3.3.1.min.js"></script>
+    <script src="/jquery/js/jquery.form.js"></script>
+    <script src="/org/js/org.all.js"></script>
+    <script src="/email/js/email.all.js"></script>
+    <script src="/platform/js/platform.js"></script>
+    <script src="/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="/dialog/js/dialog.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootbox/js/bootbox.min.js"></script>
+    <script src="/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <script src="/jqgrid/js/jquery.jqGrid.min.js"></script>
+    <script src="/jedate/js/jedate.min.js"></script>
+    <script src="/typeahead/js/bootstrap3-typeahead.min.js"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+        $(document).ready(function () {
+            Platform.srv("login-getLoginUser", {}, function (r) {
+                if (r && r.fldloginid) {
+                    window.loginUser = r;
+                    $("#loginUser").text(r.fldname);
+                    Em.init();
+                } else {
+                    bootbox.alert('请先登录');
+                    window.location.href = '/orgwork.html?to=email.html';
+                }
+            });
+            $("#quit").click(function () {
+                Platform.srv("login-loginOut", {}, function (r) {
+                    window.location.href = '/orgwork.html?to=email.html';
+                });
+            });
+            $("#work_sy").click(function () {
+                //Org.initContent();
+            });
+        });
+    </SCRIPT>
+</head>
+<body onload="" style="">
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 column" id="orgtitldiv">
+            <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+                <p class="navbar-text" id="work_sy" style="cursor: pointer;">公司邮箱</p>
+
+                <p class="navbar-text" style="float:right;"><span style="margin-right:20px;" id="loginUser"></span><a
+                        href="#" class="navbar-link" id="quit">退出</a></p>
+            </nav>
+        </div>
+        <div class="col-md-1 column">
+            <nav>
+                <ul class="nav nav-pills nav-stacked" id="menu">
+                    <li role="presentation" id="inbox"><a href="#">收件箱</a></li>
+                    <li role="presentation" id="draftbox"><a href="#">草稿箱</a></li>
+                    <li role="presentation" id="sended"><a href="#">已发送</a></li>
+                    <li role="presentation" id="deled"><a href="#">已删除</a></li>
+                    <li role="presentation" id="sendemail"><a href="#">写信</a></li>
+                </ul>
+                <div id="folderdiv">
+                    <div style="padding-left: 10px;">
+                        <span id="folderaddcut" class="glyphicon glyphicon-plus" style="cursor: pointer;"></span><span style="color: #337ab7;cursor: pointer;">文件夹</span>
+                    </div>
+                    <div>
+                        <ul id="treeFolder" class="ztree" style="padding-left: 0px;"></ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-11" name="content">
+        </div>
+    </div>
+</div>
+</body>

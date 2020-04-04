@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>政府门户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ztree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/jqgrid/css/ui.jqgrid-bootstrap4.css">
+    <link rel="stylesheet" href="/jedate/css/jedate.css">
+    <link rel="stylesheet" href="/mh/css/mh.css">
+    <script src="/jquery/js/jquery-3.3.1.min.js"></script>
+    <script src="/jquery/js/jquery.form.js"></script>
+    <script src="/mh/js/mhshow.all.js"></script>
+    <script src="/platform/js/platform.js"></script>
+    <script src="/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="/dialog/js/dialog.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootbox/js/bootbox.min.js"></script>
+    <script src="/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <script src="/jqgrid/js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="/jedate/js/jedate.min.js"></script>
+    <style type="text/css">
+        #wrapperClearfix .wrapper {
+            width: 585px;
+            height: 331px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        #wrapperClearfix .slide {
+            width: 585px;
+            height: 331px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #wrapperClearfix .slide-ul {
+            width: 585px;
+            height: 331px;
+            overflow: hidden;
+            position: relative;
+            padding-left: 0px;
+        }
+
+        #wrapperClearfix .slide-ul li {
+            display: inline;
+            float: left;
+            width: 585px;
+            height: 330px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #wrapperClearfix .slide-ul a {
+            display: block;
+            width: 585px;
+            height: 330px;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        #wrapperClearfix .slide-ul a:hover .pic-txt {
+            color: #fff;
+        }
+
+        #wrapperClearfix .slide-ul a img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #wrapperClearfix .slide-ul .pic-txt {
+            display: block;
+            bottom: 0;
+            position: absolute;
+            width: 585px;
+            height: 60px;
+            padding: 0 5px;
+            font: 14px/30px Microsoft YaHei;
+            text-align: center;
+            z-index: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#80000000, endColorstr=#80000000);
+            cursor: pointer;
+        }
+
+        #wrapperClearfix .info-btn {
+            overflow: hidden;
+            position: relative;
+        }
+
+        #wrapperClearfix .info-btn li {
+            display: inline-block;
+            padding: 0 3px;
+        }
+
+        #wrapperClearfix .info-btn li span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            overflow: hidden;
+            cursor: pointer;
+            font-size: 0px;
+            line-height: 0px;
+        }
+
+        #wrapperClearfix .info-btn .info-cur span, .info-btn .info-hover span {
+            background: #000;
+        }
+
+        #wrapperClearfix .zt_bg_side {
+            height: 28px;
+            position: absolute;
+            z-index: 100;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            width: auto;
+            text-align: center;
+        }
+    </style>
+    <SCRIPT LANGUAGE="JavaScript">
+        $(document).ready(function () {
+            var url = window.location.search;
+            url = url.substring(1);
+            var urlpar = url.split("&");
+            var lmid='';
+            var dataid='';
+            var slmid='';
+            $.each(urlpar, function (index, v) {
+                if (v.indexOf("lmid") == 0) {
+                    lmid = v.substring(5);
+                }
+                if (v.indexOf("dataid") == 0) {
+                    dataid = v.substring(7);
+                }
+                if (v.indexOf("slmid") == 0) {
+                    slmid = v.substring(6);
+                }
+            });
+            if(lmid){
+                if(slmid){
+                    MhShow.showSecond(lmid,slmid);
+                }else{
+                    MhShow.showSecond(lmid);
+                }
+                return;
+            }
+            if(dataid){
+                MhShow.showThird(dataid);
+                return;
+            }
+            MhShow.showFirst();
+        });
+    </SCRIPT>
+</head>
+<body onload="" style="">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column" id="orgtitldiv">
+            <div class="">
+                <h1>广州市某某区人民政府<a target="_blank" href="/orgwork.html?to=mh.html" style="float: right;font-size: 18px;color: #333;">登录管理</a></h1>
+            </div>
+        </div>
+        <div class="col-md-12 column">
+            <ul class="nav nav-pills" id="headerCol">
+                <li role="presentation" class="active"><a href="/mhnotice.html">首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mh_content" name="content">
+    </div>
+    <div class="row clearfix" style="margin-top: 30px;">
+    <div class="col-md-12 column" style="text-align: center;">
+        广州市某某区电子政务办公室 版权所有 © 2xx1-2xx8 粤ICP备 xxx号-1
+    </div>
+    <div class="col-md-12 column" style="text-align: center;">
+        网站标识码：xxxx 粤公网安备 xxxx号
+    </div>
+    </div>
+</div>
+</body>

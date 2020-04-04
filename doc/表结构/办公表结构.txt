@@ -1,0 +1,154 @@
+部门表
+orgdept
+
+CREATE TABLE `orgdept` (
+  `id` varchar(64) NOT NULL,
+  `fldname` varchar(500),
+  `fldshortname` varchar(500),
+  `fldenglishname` varchar(500),
+  `fldbh` varchar(500),
+  `fldbm` varchar(500),
+  `fldsn` int,
+  `fldtype` varchar(5),
+  `fldishide` varchar(5),
+  `fldparentid` varchar(64),
+  `fldparentname` varchar(500),
+  PRIMARY KEY (`id`)
+);
+
+用户表
+orguser
+
+CREATE TABLE `orguser` (
+  `id` varchar(64) NOT NULL,
+  `fldloginId` varchar(500),
+  `fldname` varchar(500),
+  `fldpassword` varchar(500),
+  `fldemial` varchar(500),
+  `fldzw` varchar(500),
+  `fldcjgzsj` varchar(500),
+  `fldgl` int,
+  `fldxl` varchar(500),
+  `fldcsrq` varchar(500),
+  `fldsfzh` varchar(500),
+  `fldzjdh` varchar(500),
+  `fldyddh` varchar(500),
+  `fldygh` varchar(500),
+  `fldzsbmid` varchar(500),
+  `fldzsbmmc` varchar(500),
+  `fldunitid` varchar(500),
+  `fldunitname` varchar(500),
+ `fldgly` varchar(2),
+  PRIMARY KEY (`id`)
+);
+
+部门用户关系表
+CREATE TABLE `orgdeptuser` (
+  `id` varchar(64) NOT NULL,
+  `fldyhid` varchar(500),
+  `fldyhmc` varchar(500),
+  `fldbmid` varchar(500),
+  `fldbmmc` varchar(500),
+  `fldsn` int,
+  PRIMARY KEY (`id`)
+);
+
+任务表
+CREATE TABLE `orgtask` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500) DEFAULT NULL,
+  `fldsend` varchar(500) DEFAULT NULL,
+  `fldsendid` varchar(64) DEFAULT NULL,
+  `fldassgin` varchar(500) DEFAULT NULL,
+  `fldassginid` varchar(64) DEFAULT NULL,
+  `fldcretime` datetime DEFAULT NULL,
+  `fldassgintime` datetime DEFAULT NULL,
+  `fldfinishtime` datetime DEFAULT NULL,
+  `fldbuk` varchar(500) DEFAULT NULL,
+  `inituserid` varchar(64) DEFAULT NULL,
+  `initusername` varchar(500) DEFAULT NULL,
+  `initbmid` varchar(64) DEFAULT NULL,
+  `initbm` varchar(64) DEFAULT NULL,
+  `initdeptid` varchar(64) DEFAULT NULL,
+  `initdeptname` varchar(64) DEFAULT NULL,
+  `initunitid` varchar(64) DEFAULT NULL,
+  `initunitname` varchar(64) DEFAULT NULL,
+  `fldlast` varchar(2) DEFAULT '0',
+  `state` varchar(2) DEFAULT '1',
+  `fldpretaskid` varchar(64) DEFAULT NULL,
+  `fldassginbmid` varchar(100) DEFAULT NULL,
+  `fldassginbm` varchar(100) DEFAULT NULL,
+  `fldassgindeptid` varchar(100) DEFAULT NULL,
+  `fldassgindeptname` varchar(100) DEFAULT NULL,
+  `fldassginunitid` varchar(100) DEFAULT NULL,
+  `fldassginunitname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) 
+
+意见表
+CREATE TABLE `orgcom` (
+  `id` varchar(64) NOT NULL,
+  `fldtaskid` varchar(64),
+  `fldcretime` datetime,
+  `fldmessage` varchar(1000) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+);
+
+工作表
+CREATE TABLE `orgwork` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500),
+  `fldcontent` text,
+  `inituserid` varchar(64),
+  `initusername` varchar(500),
+  `initbmid` varchar(64),
+  `initbm` varchar(64),
+  `initdeptid` varchar(64),
+  `initdeptname` varchar(64),
+  `initunitid` varchar(64),
+  `initunitname` varchar(64),
+  `fldngtime` datetime,
+  `state` varchar(2) DEFAULT '1',
+  `fldpretaskid` varchar(64) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+); 
+
+附件表
+CREATE TABLE `orgattach` (
+  `id` varchar(64) NOT NULL,
+  `pkid` varchar(64) DEFAULT NULL,
+  `fldpath` varchar(64) DEFAULT NULL,
+  `fldfilename` varchar(600) DEFAULT NULL,
+  `fldngdate` datetime DEFAULT NULL,
+  `fldsize` varchar(100) DEFAULT NULL,
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldusername` varchar(64) DEFAULT NULL,
+  `fldext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+意见最后时间接触表
+CREATE TABLE `orgcomtip` (
+  `id` varchar(64) NOT NULL,
+  `fldtm` varchar(500),
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldusername` varchar(64) DEFAULT NULL,
+  `fldtipuserid` varchar(64) DEFAULT NULL,
+  `fldtipusername` varchar(64) DEFAULT NULL,
+  `fldbuk` varchar(500),
+  `fldcretime` datetime,
+  `fldacctime` datetime,
+  `fldcomid` varchar(64) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+);
+
+读者域作者域表
+CREATE TABLE `orgauth` (
+  `id` varchar(64) NOT NULL,
+  `fldtype` varchar(500),              //1为作者域。
+  `flduserid` varchar(64) DEFAULT NULL,
+  `fldbuk` varchar(500),
+   PRIMARY KEY (`id`)
+);
+
+
